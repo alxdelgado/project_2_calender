@@ -1,0 +1,28 @@
+{
+  "name": "project_2_calender",
+  "version": "1.0.0",
+  "description": "Project 2 GA",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alxdelgado/project_2_calender.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alxdelgado/project_2_calender/issues"
+  },
+  "homepage": "https://github.com/alxdelgado/project_2_calender#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.2.4"
+  }
+}

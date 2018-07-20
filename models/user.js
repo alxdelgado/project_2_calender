@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
 	username: {type: String, required: true, unique: true},
 	password: {type: String, required: true},
 	preference: {type: String, default: "News"},
-	created: {type: Date, default: Date.now()},
+	created: {type: Date, default: now},
 	openTasks: [Task.schema],
 	closedTasks: [Task.schema],
 	Calendars: [Calendar.schema]

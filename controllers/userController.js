@@ -5,12 +5,13 @@ const User = require('../models/user');
 
 
 /////////////////////////
-// USER HOME ROUTE // 
+
+// USER INDEX ROUTE // 
 router.get('/', async (req, res) => {
   try {
 
     const foundUser = await User.find({}); 
-    res.render('/home.ejs', {
+    res.render('user/home.ejs', {
       user: foundUser
     });
 

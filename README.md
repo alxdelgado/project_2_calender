@@ -13,11 +13,12 @@ Project 2 GA
 
 ## How to use
 
-* Create a account and select your preference
+* Create a account and select your preferences
 * Login to view your main calendar and the current weather
 * Add a new appointment or event to have it shown on your calendar
+* Edit existing appointment or event and have changes reflected on your calendar
 * Add small tasks that need to be completed
-* Complete tasks and archive it to remove from calendar
+* Complete tasks and archive it to remove from calendar (view archived tasks?)
 * View current events in sidebar
 
 

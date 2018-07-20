@@ -21,3 +21,43 @@ Project 2 GA
 * View current events in sidebar
 
 
+## Tasks 
+* Wireframes
+* Add schemas 
+* 
+
+## Prerequisites
+* You will need to install a number of packages to run our calendar app. 
+  * The packages are: 
+      * Mongoose 
+      * Express 
+      * EJS 
+      * Body-Parser
+      * Method-Override
+      * Express Session
+
+
+## Install 
+* Fork repo 
+* Git Clone repo
+* ``` npm install``` will install prereq's. 
+
+## Built With 
+* Node.js
+* MongoDB
+
+
+## Authors 
+* Badal Moradia 
+* Alex Delgado  
+
+
+## License 
+* MIT License 
+
+
+
+
+
+
+

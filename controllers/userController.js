@@ -6,17 +6,17 @@ const User = require('../models/user');
 
 /////////////////////////
 // HOME/INDEX ROUTE // 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   try {
 
     const foundUser = await User.find({}); 
-    res.render('/home.ejs', {
+    res.render('user/home.ejs', {
       user: foundUser
     });
 
   } catch(err) {
 
-    next(err)
+    console.log(err, 'error with home route')
 
   }
 

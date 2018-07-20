@@ -9,8 +9,9 @@ const port = 7000;
 
 require('./db/db');
 
-
+//add controllers here
 const eventController = require('./controllers/eventController');
+const userController = require('./controllers/userController');
 
 
 //setup session
@@ -26,17 +27,22 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 
+
+
 //making middleware to redirect to login page unless user is logged in
-app.use((req, res, next) => {
-	if(!req.session.logged) {
-		res.redirect('/users/login') //adjust home page to whatever the main loading page is
-	} else {
-		next();
-	}
-})
+// app.use((req, res, next) => {
 
+// 	console.log(req.session.cookie.path)
+// 	if(!req.session.logged && req.session.cookie.path !== '/') {
+// 		res.redirect('/user/') //adjust home page to whatever the main loading page is
+// 	} else {
+// 		next();
+// 	}
+// })
 
+//use controllers here
 app.use('/events', eventController);
+app.use('/user', userController);
 
 
 app.listen(port, () => {

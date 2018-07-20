@@ -9,4 +9,6 @@ const calendarSchema = new mongoose.Schema({
 	events: [Event.schema]
 });
 
-mongoose.model('Calendar', calendarSchema);
+module.exports = mongoose.model('Calendar', calendarSchema);
+
+

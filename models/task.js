@@ -8,4 +8,4 @@ const taskSchema = new mongoose.Schema({
 	priority: {type: Number, min: 1, max: 4}
 });
 
-mongoose.model('Task', taskSchema);
+module.exports = mongoose.model('Task', taskSchema);

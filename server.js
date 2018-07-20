@@ -29,16 +29,6 @@ app.use(methodOverride('_method'));
 
 
 
-//making middleware to redirect to login page unless user is logged in
-// app.use((req, res, next) => {
-
-// 	console.log(req.session.cookie.path)
-// 	if(!req.session.logged && req.session.cookie.path !== '/') {
-// 		res.redirect('/user/') //adjust home page to whatever the main loading page is
-// 	} else {
-// 		next();
-// 	}
-// })
 
 //use controllers here
 app.use('/events', eventController);

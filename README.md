@@ -13,7 +13,7 @@ Project 2 GA
 
 ## How to use
 
-* Create a account and select your preferences
+* Create a account and select your preference
 * Login to view your main calendar and the current weather
 * Add a new appointment or event to have it shown on your calendar
 * Add small tasks that need to be completed

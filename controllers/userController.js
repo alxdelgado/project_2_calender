@@ -5,7 +5,8 @@ const User = require('../models/user');
 
 
 /////////////////////////
-// HOME/INDEX ROUTE // 
+
+// USER INDEX ROUTE // 
 router.get('/', async (req, res) => {
   try {
 
@@ -16,13 +17,19 @@ router.get('/', async (req, res) => {
 
   } catch(err) {
 
-    console.log(err, 'error with home route')
+    console.log(err, 'error with the user home route'); 
 
   }
 
 }); 
 /////////////////////////
 
+/////////////////////////
+// USER NEW ROUTE // 
+router.get('/', (req, res) => {
+    
+
+})
 
 
 

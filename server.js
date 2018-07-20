@@ -35,6 +35,17 @@ app.use('/events', eventController);
 app.use('/user', userController);
 
 
+// login // 
+app.get('/', (req, res,) => {
+  res.render('user/login.ejs')  
+});
+
+// register // 
+app.get('/', (req, res) => {
+  res.render('user/register.ejs')
+});
+
+
 app.listen(port, () => {
 	console.log(`Server is listening on port: ${port}`);
 })

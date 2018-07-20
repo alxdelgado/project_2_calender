@@ -25,11 +25,38 @@ router.get('/', async (req, res) => {
 /////////////////////////
 
 /////////////////////////
-// USER NEW ROUTE // 
-router.get('/', (req, res) => {
-    
+// USER LOGIN ROUTE // 
+router.get('/', async (req, res) => {
+    try {
+      const loginUser = await User.find({}); 
+      res.render('user/login.ejs', {
+      });
 
-})
+    } catch(err) {
+
+      console.log(err, 'error with the user login route')
+
+    }
+
+});
+/////////////////////////
+
+
+/////////////////////////
+// USER REGISTER ROUTE // 
+router.get('/', async (req, res) => {
+  try {
+    const registerUser = await User.find({});
+    res.render('user/register.ejs', {
+    }); 
+
+  } catch(err) {
+
+    console.log(err, 'error with the user register route ')
+
+  }
+
+});
 
 
 

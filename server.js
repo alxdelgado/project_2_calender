@@ -5,15 +5,12 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const session = require('express-session');
 
-
-const userController = require('./controllers/userController');
-const eventController = require('./controllers/eventController');
-const calendarController = require('./controllers/calendarController');
-const taskController = require('./controllers/taskController');
-
 const port = 7000;
 
 require('./db/db');
+
+
+const eventController = require('./controllers/eventController');
 
 
 //setup session
@@ -29,10 +26,17 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 
-app.use('/user', userController);
-app.use('/event', eventController);
-app.use('/task', taskController);
-app.use('/calendar', calendarController);
+//making middleware to redirect to login page unless user is logged in
+app.use((req, res, next) => {
+	if(!req.session.logged) {
+		res.redirect('/users/login') //adjust home page to whatever the main loading page is
+	} else {
+		next();
+	}
+})
+
+
+app.use('/events', eventController);
 
 
 app.listen(port, () => {

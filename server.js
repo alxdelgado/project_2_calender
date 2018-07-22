@@ -12,6 +12,7 @@ require('./db/db');
 //add controllers here
 const eventController = require('./controllers/eventController');
 const userController = require('./controllers/userController');
+const calendarController = require('./controllers/calendarController');
 
 
 //setup session
@@ -33,7 +34,7 @@ app.use(methodOverride('_method'));
 //use controllers here
 app.use('/events', eventController);
 app.use('/user', userController);
-
+app.use('/calendar', calendarController);
 
 app.listen(port, () => {
 	console.log(`Server is listening on port: ${port}`);

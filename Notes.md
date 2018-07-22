@@ -10,3 +10,4 @@ DELETE eventController.js line 14 before merging
 
 
 ---- Changed DB name to project_2_GA -------
+-- Need to update put route in Event Controller

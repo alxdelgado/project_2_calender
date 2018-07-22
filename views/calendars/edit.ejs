@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit <%=calendar.name%></title>
+</head>
+<body>
+
+	<header>
+		<nav>
+			<a href="/users">Cancel</a>
+		</nav>
+	</header>
+
+	<main>
+		<form method='POST' action='/calendar/<%=calendar.id%>?_method=PUT'>
+			<h4>Calendar Name: </h4><br>
+			<input type="text" name="name" value="<%=calendar.name%>"><br>
+			<h4>Calendar Color: </h4>
+			<input type="color" name="color" value='<%=calendar.color%>'><br><br>
+			<button>Save Changes</button>
+					
+		</form>
+	</main>
+
+</body>
+</html>

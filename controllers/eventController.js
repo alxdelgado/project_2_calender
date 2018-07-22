@@ -131,7 +131,7 @@ router.post('/', async (req, res) => {
 router.get('/:id/edit', async (req, res) => {
 	try {
 		//const foundEvent = await Event.findById(req.params.id);
-		//const foundCalendar = await Calendar.findById(foundEvent.caledarId);
+		//const foundCalendar = await Calendar.findById(foundEvent.calendarId);
 				const foundEvent = { name: 'Testing1',
   							 startDate: '2018-07-22',
   							 startTime: '03:00',
@@ -158,6 +158,32 @@ router.put('/:id', async (req, res) => {
 
 	} catch (err) {
 		console.log(err, 'error with event put route')
+	}
+})
+
+
+router.delete('/:id', async (req, res) => {
+	try {
+		const foundEvent = await Event.findById(req.params.id);
+		//find the event in the calendar and user collections
+		const foundCalendar = await Calendar.find({'events.id': req.params.id});
+		const foundUser = await User.find({'Calendars.id': foundCalendar.id});
+		const calendarName = foundCalendar.name;
+
+		//find the event in the User model and remove
+		foundUser.Calendars.id(foundCalendar.id).events.id(foundEvent.id).remove();
+		//find the event in the Calendar mondel and remove
+		foundCalendar.events.id(foundEvent.id).remove();
+		//save the User and Calendar models
+		foundUser.save();
+		foundCalendar.save()
+		//find the event in the Event model and remove
+		const deletedEvent = await Event.findByIdAndRemove(req.params.id);
+		//redirect to the User's home page
+		res.redirect('/users/' + req.params.id);
+
+	} catch (err) {
+		console.log(err, 'error with event delete route')
 	}
 })
 

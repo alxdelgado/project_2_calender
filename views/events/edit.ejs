@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit <%=event.name%></title>
+</head>
+<body>
+
+	<header>
+		<nav>
+				<a href="/user">Cancel</a>
+		</nav>
+	</header>
+
+	<main>
+		<h2>Edit <%=event.name%></h2>
+		<form method='POST' action='/events/asdf<%=event.id%>?_method=PUT'>
+			Appointment Name:<br>
+			<input type="text" name="name" value="<%=event.name%>" autofocus><br><br>
+			Start Date:<br>
+			<input type="date" name="startDate" value="<%=event.startDate%>"><br>
+			Start Time: <br>
+			<input type="time" name="startTime" value='<%=event.startTime%>'><br><br>
+				All Day <input type="checkbox" name="allDay"><br><br>
+			End Date: <br>
+			<input type="date" name="endDate" value='<%=event.endDate%>'><br>
+			End Time: <br>
+			<input type="time" name="endTime" value='<%=event.endTime%>'><br><br>
+
+			<textarea name='people'"><%=event.people%></textarea><br>
+			<input type="text" name="location" value="<%=event.location%>"><br>
+			<button>Save</button>
+		</form>
+	
+
+	</main>
+
+</body>
+</html>

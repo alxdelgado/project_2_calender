@@ -3,8 +3,7 @@ const router = express.Router();
 
 
 const User = require('../models/user');
-
-
+const Calendar = require('../models/calendar');
 const Event = require('../models/event');
 
 // making middleware to redirect to login page unless user is logged in
@@ -64,10 +63,10 @@ const getDateTime = () => {
 		newMonth = `0${newMonth}`
 	}
 	if(hour < 10) {
-		month = `0${hour}`;
+		hour = `0${hour}`;
 	}
 	if(newHour < 10) {
-		newMonth = `0${newHour}`
+		newHour = `0${newHour}`
 	}
 	const currentDateString = `${year}-${month}-${day}`;
 	const currentTimeString = `${hour}:${minute}`;
@@ -89,52 +88,67 @@ router.get('/new', async (req, res) => {
 
 //CREATE EVENT ROUTE
 router.post('/', async (req, res) => {
+	try{
 
-	//change allDay from on to true/false
-	if(req.body.allDay === 'on') {
-		req.body.allDay = true;
-	} else {
-		req.body.allDay = false;
-	};
-
-	//convert long string of people into different people that can saved into people array
-	let index = 0;
-
-	//need to find which calendar the user is using
-	const foundUser = await User.findById(req.session.userId);
-	console.log(req.body)
-
-	while(req.body.people.indexOf('\r\n', index) !== -1) {
-		let prevIndex = index;
-		index = req.body.people.indexOf('\r\n', index);
-		//save the string to the calendar being selected
-		if(prevIndex === 0) {
-			prevIndex = prevIndex - 1;
+		//change allDay from on to true/false
+		if(req.body.allDay === 'on') {
+			req.body.allDay = true;
+		} else {
+			req.body.allDay = false;
+		};
+	
+		//convert long string of people into different people that can saved into people array
+		let index = 0;
+	
+		//need to find which calendar the user is using
+		const foundUser = await User.findById(req.session.userId);
+		console.log(req.body)
+	
+		//used to loop over and split all the different people/emails entered into req.body.people
+		while(req.body.people.indexOf('\r\n', index) !== -1) {
+			let prevIndex = index;
+			index = req.body.people.indexOf('\r\n', index);
+			//save the string to the calendar being selected
+			if(prevIndex === 0) {
+				prevIndex = prevIndex - 1;
+			}
+			//used to correctly splice the email address
+			const person = req.body.people.slice(prevIndex + 1, index);
+			console.log(person);
+			index = index + 1;
 		}
-		//used to correctly splice the email address
-		const person = req.body.people.slice(prevIndex + 1, index);
+		const person = req.body.people.slice(index + 1);
 		console.log(person);
-		index = index + 1;
+
+		res.send('you done posted')
+	} catch (err) {
+		console.log(err, 'error with event create route')
 	}
-	res.send('you done posted')
 })
 
 
 //SHOW EVENT ROUTE
 router.get('/:id', async (req, res) => {
 
+	try {
 
-
-
-
-	res.send('Show Route')
+		//const foundEvent = await Event.findById(req.params.id);
+		//const foundCalendar = await Calendar.findById(foundEvent.calendarId);
+		const foundEvent = { name: 'Testing1',
+  							 startDate: '2018-07-22',
+  							 startTime: '03:00',
+  							 endDate: '2018-07-22',
+  							 endTime: '04:00',
+  							 people: ['antying@gmail.com'],
+  							 location: 'asdf',
+  							 allDay: false };
+		res.render('events/show.ejs', {
+			event: foundEvent
+			//calendar: foundCalendar
+		})
+	} catch (err) {
+		console.log(err, 'error with event show route')
+	}
 })
-
-
-
-
-
-
-
 
 module.exports = router;

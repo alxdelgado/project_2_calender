@@ -38,7 +38,8 @@ const eventSchema = new mongoose.Schema({
 	endTime: {type: String}, 
 	allDay: {type: Boolean, default: false},
 	people: [{type: String}],
-	location: String
+	location: String, 
+	calendarId: String
 });
 
 module.exports = mongoose.model('Event', eventSchema);

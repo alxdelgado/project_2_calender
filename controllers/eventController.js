@@ -27,7 +27,7 @@ router.use((req, res, next) => {
 const getDateTime = () => {
 	let today = new Date();
 	let minute = today.getUTCMinutes();
-	console.log(today)
+
 	if(minute < 30) {
 		minute = 30;
 	} else {
@@ -49,7 +49,6 @@ const getDateTime = () => {
 	const futureMilliseconds = nowMilliseconds + 1800000 + 1800000;
 	today.setTime(futureMilliseconds);
 
-	console.log(today)
 	const newDay = today.getUTCDate();
 	let newMonth = today.getUTCMonth() + 1;
 	const newYear = today.getUTCFullYear();
@@ -63,6 +62,12 @@ const getDateTime = () => {
 	}
 	if(newMonth < 10) {
 		newMonth = `0${newMonth}`
+	}
+	if(hour < 10) {
+		month = `0${hour}`;
+	}
+	if(newHour < 10) {
+		newMonth = `0${newHour}`
 	}
 	const currentDateString = `${year}-${month}-${day}`;
 	const currentTimeString = `${hour}:${minute}`;
@@ -78,10 +83,52 @@ router.get('/new', async (req, res) => {
 	// 	user: foundUser
 	// });
 	const timeArray = getDateTime();
-	console.log(timeArray)
 
 	res.render('events/new.ejs', {timeArray: timeArray});
 });
+
+//CREATE EVENT ROUTE
+router.post('/', async (req, res) => {
+
+	//change allDay from on to true/false
+	if(req.body.allDay === 'on') {
+		req.body.allDay = true;
+	} else {
+		req.body.allDay = false;
+	};
+
+	//convert long string of people into different people that can saved into people array
+	let index = 0;
+
+	//need to find which calendar the user is using
+	const foundUser = await User.findById(req.session.userId);
+	console.log(req.body)
+
+	while(req.body.people.indexOf('\r\n', index) !== -1) {
+		let prevIndex = index;
+		index = req.body.people.indexOf('\r\n', index);
+		//save the string to the calendar being selected
+		if(prevIndex === 0) {
+			prevIndex = prevIndex - 1;
+		}
+		//used to correctly splice the email address
+		const person = req.body.people.slice(prevIndex + 1, index);
+		console.log(person);
+		index = index + 1;
+	}
+	res.send('you done posted')
+})
+
+
+//SHOW EVENT ROUTE
+router.get('/:id', async (req, res) => {
+
+
+
+
+
+	res.send('Show Route')
+})
 
 
 

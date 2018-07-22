@@ -13,18 +13,23 @@
 
 	<main>
 		<h2>Create New Appointment</h2>
-		Appointment Name:<br>
-		<input type="text" name="name" placeholder="Appointment Name" autofocus><br><br>
-		Start Date:<br>
-		<input type="date" name="startDate" value="<%=timeArray[0]%>"><br>
-		Start Time: <br>
-		<input type="time" name="startTime" value='<%=timeArray[1]%>'><br><br>
-			All Day <input type="checkbox" name="allDay"><br><br>
-		End Date: <br>
-		<input type="date" name="endDate" value='<%=timeArray[2]%>'><br>
-		End Time: <br>
-		<input type="time" name="endTime" value='<%=timeArray[3]%>'><br><br>
-		<button>Save</button>
+		<form method='POST' action='/events/'>
+			Appointment Name:<br>
+			<input type="text" name="name" placeholder="Appointment Name" autofocus><br><br>
+			Start Date:<br>
+			<input type="date" name="startDate" value="<%=timeArray[0]%>"><br>
+			Start Time: <br>
+			<input type="time" name="startTime" value='<%=timeArray[1]%>'><br><br>
+				All Day <input type="checkbox" name="allDay"><br><br>
+			End Date: <br>
+			<input type="date" name="endDate" value='<%=timeArray[2]%>'><br>
+			End Time: <br>
+			<input type="time" name="endTime" value='<%=timeArray[3]%>'><br><br>
+
+			<textarea name='people' placeholder="Add Invitees"></textarea><br>
+			<input type="text" name="location" placeholder="Location"><br>
+			<button>Save</button>
+		</form>
 	
 
 	</main>

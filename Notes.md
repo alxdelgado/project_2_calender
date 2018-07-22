@@ -6,3 +6,4 @@ req.session.userId = logged in user's id
 
 
 DELETE eventController.js line 14 before merging
+---- TIME is not working properly in eventController ---

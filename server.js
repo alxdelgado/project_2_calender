@@ -19,7 +19,7 @@ app.use(session({
 	secret: '9fajdf9urajdkfaskfjaijfasfjahsdflasfhauiuriwfkjafaf',
 	resave: false, //only save when the session object has been modified
 	saveUninitialized: false //user for login sessions, we only want to save when we modify the session
-}));
+})); 
 
 
 //MiddleWare

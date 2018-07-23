@@ -6,11 +6,22 @@
 <body>
   <header>
     <ul>
-      <li><a href="/">Home</a></li>
+      <li><a href="/">Calendar Home</a></li>
     </ul>
   </header>
   <main>
-    <h2>Select Your Prefence</h2>
+    <h2>Select Your Prefence:</h2>
+
+    <form method='POST' action='/user/<%=user.id%>/preferences?_method=PUT'>
+    	<select name='preference' autofocus>
+    		<option value='News' <%if(user.preference === 'News') { %> selected <% } %>>News</option>
+    		<option value='Stocks' <%if(user.preference === 'Stocks') { %> selected <% } %>>Stocks</option>
+    		<option value='Sports' <%if(user.preference === 'Sports') { %> selected <% } %>>Sports</option>
+    		<option value='Entertainment' <%if(user.preference === 'Entertainment') { %> selected <% } %>>Entertainment</option>
+    	</select>
+
+    	<button>Save Changes</button>
+    </form>
   </main>
 </body>
 </html>

@@ -6,9 +6,24 @@
 <body>
   <header>
     <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/user/">User Home Page</a></li>
+      <li><a href="/events/new">New Event</a></li>
+      <li><a href="/calendar/new">New Calendar</a></li>
+      <li><a href="/user/<%=user.id%>/preferences">Edit Preferences</a></li>
     </ul>
   </header>
+
+  <h1><%=user.username%>'s Calendar</h1>
+
+  <div class="month">      
+  <ul>
+    <li class="prev">&#10094;</li>
+    <li class="next">&#10095;</li>
+    <li>
+      <%=monthName%><br>
+      <span><%=year%></span>
+    </li>
+  </ul>
+</div>
+
 </body>
 </html>

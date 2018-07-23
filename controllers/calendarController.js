@@ -3,6 +3,7 @@ const router = express.Router();
 
 const User = require('../models/user');
 const Event = require('../models/event');
+const Calendar = require('../models/calendar');
 
 
 //NEW CALENDAR ROUTE
@@ -22,8 +23,9 @@ router.get('/new', async (req, res) => {
 router.post('/', async (req, res) => {
 	try{
 		const foundUser = await User.findById(req.session.userId);
-		for (let i = 0; i < foundUser.Calendars.length; i++) {
-			if(req.body.color === foundUser.Calendars[i].color) {
+		console.log(foundUser)
+		for (let i = 0; i < foundUser.calendars.length; i++) {
+			if(req.body.color === foundUser.calendars[i].color) {
 				res.render('calendars/new.ejs', {
 					uniqueColor: true
 				})

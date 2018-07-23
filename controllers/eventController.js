@@ -102,7 +102,6 @@ router.post('/', async (req, res) => {
 	
 		//need to find which calendar the user is using
 		const foundUser = await User.findById(req.session.userId);
-		console.log(req.body)
 	
 		//used to loop over and split all the different people/emails entered into req.body.people
 		while(req.body.people.indexOf('\r\n', index) !== -1) {

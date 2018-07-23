@@ -18,7 +18,7 @@ router.get('/new', async (req, res) => {
 });
 
 
-//CREATE CAlENDAR ROUTE
+//CREATE CALENDAR ROUTE
 router.post('/', async (req, res) => {
 	try{
 		const foundUser = await User.findById(req.session.userId);
@@ -79,6 +79,7 @@ router.put('/:id', async (req, res) => {
 		foundCalendar.name = req.body.name;
 		foundCalendar.color = req.body.color;
 		foundCalendar.save();
+		res.redirect('/users');
 
 	} catch (err) {
 		console.log(err, 'error with update calendar route')

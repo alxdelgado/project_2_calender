@@ -18,6 +18,7 @@ router.post('/register', (req, res) => {
   const userDbEntry = {};
   userDbEntry.username = req.body.username;
   userDbEntry.password = passwordHash;
+  userDbEntry.calendars = [];
 
   // Create an entry into the database. 
   User.create(userDbEntry, (err, user) => {

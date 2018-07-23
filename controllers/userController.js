@@ -109,8 +109,8 @@ router.delete('/:id', async (req, res) => {
 
   } catch(err) {
 
-
-
+    console.log(err, 'error with delete route')
+    res.send(err)
   }
 
 })

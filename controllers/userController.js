@@ -33,26 +33,6 @@ router.get('/', async (req, res) => {
 
 
 /////////////////////////
-// USER REGISTER ROUTE // 
-router.post('/register', async (req, res) => {
-  try {
-    const registerUser = await User.find({});
-    res.render('user/login.ejs', {
-      user: registerUser
-    }); 
-
-  } catch(err) {
-
-    console.log(err, 'error with the user register route')
-    res.send(err)
-
-  }
-
-});
-/////////////////////////
-
-
-/////////////////////////
 // PREFERENCES ROUTE // 
 router.get('/:id/preferences', async (req, res) => {
   try {
@@ -111,12 +91,64 @@ router.delete('/:id', async (req, res) => {
 
   } catch(err) {
 
-    console.log(err, 'error with delete route')
-    res.send(err)
+    console.log(err, 'error with delete route');
+    res.send(err);
 
   }
 
 }); 
+
+////////////////////////
+
+router.get('/:id', async (req, res) => {
+  try {
+
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const today = new Date();
+    const month = monthNames[today.getMonth()];
+    const year = today.getFullYear();
+
+    res.redirect(`/user/${req.session.userId}/${month}/${year}`)
+
+  } catch (err) {
+    console.log(err, 'error with user show route');
+  }
+})
+
+
+////////////////////////
+// SHOW ROUTE //
+router.get('/:id/:month/:year', async (req, res) => {
+  try {
+    const foundUser = await User.findById(req.session.userId);
+    const allCalendars = await Calendar.find({'userId': req.session.id});
+    const allEvents = [];
+
+    for(let i = 0; i < allCalendars.length; i++) {
+      const foundEvents = await Event.find({'calendarId': allCalendars[i].id})
+      allEvents.push(foundEvents);
+    }
+
+    if(req.params.id !== req.session.userId) {
+      res.redirect('/user/' + req.session.userId);
+    } else {
+      res.render('user/home.ejs', {
+        user: foundUser,
+        calendars: allCalendars, 
+        events: allEvents, 
+        month: req.params.month,
+        year: req.params.year
+      })
+    }
+
+  } catch (err) {
+    console.log(err, 'error with user show route');
+  }
+})
+
+/////////////////////////
+
+
 
 
 

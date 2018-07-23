@@ -6,29 +6,44 @@ const Event = require('../models/event');
 const Calendar = require('../models/calendar');
 
 
+// Make middleware to redirect to login unless user is logged in. // 
+router.use('/login', (req, res, next) => {
+	console.log('getting here')
+  if(!req.session.logged) {
+  	res.redirect('/user/login')
+  } else {
+  	next(err); 
+  }
+
+}); 
+
+
 //NEW CALENDAR ROUTE
 router.get('/new', async (req, res) => {
-	// const foundUser = await User.findById(req.sessions.userId);
-	// res.render('/events/new.ejs', {
-	// 	user: foundUser
-	// });
+	try {
+		const foundUser = await User.findById(req.session.userId); 
+		res.render('calendars/new.ejs', {
+			uniqueColor: false, 
+			user: foundUser
+		});
+	} catch(err) {
 
-	res.render('calendars/new.ejs', {
-		uniqueColor: false
-	});
+		console.log(err, 'error with new calendar route');
+		res.send(err); 
+
+	}
 });
 
-
-//CREATE CALENDAR ROUTE
+// CREATE CALENDAR ROUTE
 router.post('/', async (req, res) => {
 	try{
 		const foundUser = await User.findById(req.session.userId);
 		console.log(foundUser)
 		for (let i = 0; i < foundUser.calendars.length; i++) {
 			if(req.body.color === foundUser.calendars[i].color) {
-				res.render('calendars/new.ejs', {
+				res.render('calendar/new.ejs', {
 					uniqueColor: true
-				})
+				});
 			}
 		}
 		//add empty array to req.body
@@ -38,14 +53,14 @@ router.post('/', async (req, res) => {
 		//create new Calendar entry
 		const newCalendar = await Calendar.create(req.body);
 		//push new calendar entry to current user
-		foundUser.calendars.push(req.body)
+		foundUser.calendars.push(newCalendar)
 		foundUser.save();
 		
 		res.redirect('/users')
 	} catch (err) {
 		console.log(err, 'error with create calendar route')
 	}
-})
+});
 
 
 //EDIT CALENDAR ROUTE
@@ -55,17 +70,17 @@ router.get('/:id/edit', async (req, res) => {
 		res.render('calendars/edit.ejs', {
 			calendar: foundCalendar, 
 			uniqueColor: false
-		})
+		});
 
 	} catch (err) {
 		console.log(err, 'error with edit calendar route');
 	}
-})
+});
 
 
 //UPDATE CALENDAR ROUTE
 router.put('/:id', async (req, res) => {
-	//check if calendar color has been used by Uesr before.
+	//check if calendar color has been used by User before.
 	try {
 		const foundUser = await User.findById(req.session.userId);
 		const foundCalendar = await Calendar.findById(req.params.id);
@@ -74,7 +89,7 @@ router.put('/:id', async (req, res) => {
 				res.render('calendars/edit.ejs', {
 					calendar: foundCalendar,
 					uniqueColor: true
-				})
+				});
 			}
 		}
 
@@ -87,7 +102,7 @@ router.put('/:id', async (req, res) => {
 		console.log(err, 'error with update calendar route')
 	}
 
-})
+});
 
 
 //DELETE CALENDAR ROUTE
@@ -108,13 +123,7 @@ router.delete('/:id', async (req, res) => {
 	} catch (err) {
 		console.log(err, 'error with delete calendar route')
 	}
-})
-
-
-
-
-
-
+});
 
 
 module.exports  = router;

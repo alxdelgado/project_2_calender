@@ -30,8 +30,12 @@
 			<input type="text" name="location" placeholder="Location"><br>
 			<button>Save</button>
 		</form>
-	
-
+		<select>
+				<% for(let i = 0; i < user.calendars.length; i++) { %>
+					<option value="<%= user.calendars[i].id %>"><%= user.calendars[i].name %></option>
+				<% } %>	
+		</select>
+		
 	</main>
 
 </body>

@@ -77,13 +77,23 @@ const getDateTime = () => {
 
 //NEW EVENT ROUTE
 router.get('/new', async (req, res) => {
-	// const foundUser = await User.findById(req.sessions.userId);
-	// res.render('/events/new.ejs', {
-	// 	user: foundUser
-	// });
+	const foundUser = await User.findById(req.session.userId);
+	// console.log(foundUser)
 	const timeArray = getDateTime();
 
-	res.render('events/new.ejs', {timeArray: timeArray});
+	if(foundUser.calendars.length > 0){
+		// console.log('error with the event/new route')
+		console.log(foundUser.calendars)  
+		res.render('events/new.ejs', {
+			timeArray: timeArray,
+			user: foundUser
+		});
+	
+	} else {
+		// console.log('whats going on?')
+		res.redirect('/calendar/new')
+	}
+	
 });
 
 //CREATE EVENT ROUTE

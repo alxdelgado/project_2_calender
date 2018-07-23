@@ -12,6 +12,7 @@ require('./db/db');
 //add controllers here
 const eventController = require('./controllers/eventController');
 const userController = require('./controllers/userController');
+const authController = require('./controllers/authController');
 
 
 //setup session
@@ -33,6 +34,7 @@ app.use(methodOverride('_method'));
 //use controllers here
 app.use('/events', eventController);
 app.use('/user', userController);
+app.use('/auth', authController); 
 
 
 // login // 
@@ -43,6 +45,11 @@ app.get('/', (req, res,) => {
 // register // 
 app.get('/', (req, res) => {
   res.render('user/register.ejs')
+});
+
+// Preferences // 
+app.get('/', (req, res) => {
+  res.render('user.preference.ejs')
 });
 
 

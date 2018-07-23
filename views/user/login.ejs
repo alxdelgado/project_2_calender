@@ -9,17 +9,17 @@
   </header>
   <main>
     <h4>Login</h4>
-    <form method="POST" action="/user">
+    <form method="POST" action="/auth/login">
       <input type="text" placeholder="username" name="username"><br/>
-      <input type="text" placeholder="password" name="password"><br/>
+      <input type="password" placeholder="password" name="password"><br/>
       <button>Submit</button><br/>
     </form>
 
     <h1>Register</h1>
-    <form method="POST" action="/user">
+    <form method="POST" action="/auth/register">
       Username: <input type="text" placeholder="username" name="username"><br/>
-      Password: <input type="text" placeholder="password" name="password"><br/>
-      Confirm Password: <input type="text" placeholder="password" name="password"></input><br/>
+      Password: <input type="password" placeholder="password" name="password"><br/>
+      Confirm Password: <input type="password" placeholder="password" name="password"></input><br/>
       <button>Submit</button>
     </form>
   </main>

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/calendar');
+mongoose.connect('mongodb://localhost/calendar_GA_PROJECT');
 
 
 mongoose.connection.on('connected', () => {

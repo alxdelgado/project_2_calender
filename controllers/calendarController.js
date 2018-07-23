@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
 		//create new Calendar entry
 		const newCalendar = await Calendar.create(req.body);
 		//push new calendar entry to current user
-		foundUser.calendars.push(req.body)
+		foundUser.calendars.push(newCalendar)
 		foundUser.save();
 		
 		res.redirect('/users')

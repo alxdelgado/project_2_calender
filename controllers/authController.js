@@ -9,7 +9,6 @@ const bcrypt = require('bcrypt');
 
 // Register route // 
 router.post('/register', (req, res) => {
-  console.log(req.body.password);
   
   const password = req.body.password;
   const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
@@ -33,13 +32,10 @@ router.post('/register', (req, res) => {
 
 // Login // 
 router.post('/login', (req, res) => {
-  console.log('Got here')
   User.findOne ({username: req.body.username}, (err, user) => {
     if(user){
-      console.log('user found', user);
       // If the user is found. 
       if(bcrypt.compareSync(req.body.password, user.password)){
-        console.log('passwords matched');
         req.session.userId = user.id;
         req.session.username = user.username;
         req.session.loggedIn = true; 

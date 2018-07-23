@@ -6,8 +6,9 @@
 <body>
   <header>
     <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/user/">User Home Page</a></li>
+      <li><a href="/events/new">New Event</a></li>
+      <li><a href="/calendar/new">New Calendar</a></li>
+      <li><a href="/user/<%=user.id%>/preferences">Edit Preferences</a></li>
     </ul>
   </header>
 
@@ -18,8 +19,8 @@
     <li class="prev">&#10094;</li>
     <li class="next">&#10095;</li>
     <li>
-      <%=month%><br>
-      <span style="font-size:18px"><%=year%></span>
+      <%=monthName%><br>
+      <span><%=year%></span>
     </li>
   </ul>
 </div>

@@ -15,7 +15,6 @@ $('input').on('keyup', (event) => {
 	// //console.log($password2.val());	
 
 	if(($password1.val() !== $password2.val()) || $password1.val() == '' || $password2.val() == '') {
-		console.log('got in here')
 		$('#newUserButton').prop('disabled', true)
 		$('#newUserButton').css('cursor', 'not-allowed')
 	} else {

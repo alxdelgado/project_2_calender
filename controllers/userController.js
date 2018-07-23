@@ -72,7 +72,7 @@ router.get('/:id/preferences', async (req, res) => {
 });
 /////////////////////////
 // Update User // 
-router.post('/:id/preferences', async (req, res) => {
+router.put('/:id/preferences', async (req, res) => {
   
   try {
 

@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
 	created: {type: Date, default: now},
 	openTasks: [Task.schema],
 	closedTasks: [Task.schema],
-	Calendars: [Calendar.schema]
+	calendars: [Calendar.schema]
 });
 
 module.exports = mongoose.model('User', userSchema);

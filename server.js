@@ -13,6 +13,8 @@ require('./db/db');
 const eventController = require('./controllers/eventController');
 const userController = require('./controllers/userController');
 const calendarController = require('./controllers/calendarController');
+const authController = require('./controllers/authController');
+
 
 
 //setup session
@@ -35,6 +37,14 @@ app.use(methodOverride('_method'));
 app.use('/events', eventController);
 app.use('/user', userController);
 app.use('/calendar', calendarController);
+app.use('/auth', authController); 
+
+
+// login // 
+app.get('/', (req, res,) => {
+  res.render('user/login.ejs')  
+});
+
 
 app.listen(port, () => {
 	console.log(`Server is listening on port: ${port}`);

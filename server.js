@@ -42,7 +42,7 @@ app.use('/auth', authController);
 
 // login // 
 app.get('/', (req, res,) => {
-  res.render('user/login.ejs')  
+  res.redirect('/user')  
 });
 
 

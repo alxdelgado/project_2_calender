@@ -9,6 +9,10 @@
   </header>
   <main>
     <h4>Login</h4>
+    <% if(message) {%>
+      <small><%=message%></small><br>
+    <% } %>
+    <br>
     <form method="POST" action="/auth/login">
       <input type="text" placeholder="username" name="username"><br/>
       <input type="password" placeholder="password" name="password"><br/>
@@ -19,7 +23,7 @@
     <form method="POST" action="/auth/register">
       Username: <input type="text" placeholder="username" name="username"><br/>
       Password: <input type="password" placeholder="password" name="password"><br/>
-      Confirm Password: <input type="password" placeholder="password" name="password"></input><br/>
+      Confirm Password: <input type="password" placeholder="password" name="checkPassword"></input><br/>
       <button>Submit</button>
     </form>
   </main>

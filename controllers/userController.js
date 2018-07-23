@@ -12,10 +12,12 @@ router.get('/', async (req, res) => {
   
   try {
 
+
     if(req.session.loggedIn === true) {
       res.redirect('/user/' + req.session.userId)
     } else {
       res.render('user/login.ejs', {
+        message: req.session.message
       });
 
     }
@@ -111,6 +113,7 @@ router.delete('/:id', async (req, res) => {
 
     console.log(err, 'error with delete route')
     res.send(err)
+    
   }
 
 })

@@ -164,23 +164,25 @@ router.post('/', async (req, res) => {
 //EDIT EVENT ROUTE
 router.get('/:id/edit', async (req, res) => {
 	try {
-		//const foundEvent = await Event.findById(req.params.id);
-		//const foundCalendar = await Calendar.findById(foundEvent.calendarId);
-				const foundEvent = { name: 'Testing1',
-  							 startDate: '2018-07-22',
-  							 startTime: '03:00',
-  							 endDate: '2018-07-22',
-  							 endTime: '04:00',
-  							 people: ['antying@gmail.com', 'something@gmail.com'],
-  							 location: 'asdf',
-  							 allDay: false };
+		const foundEvent = await Event.findById(req.params.id);
+		const foundCalendar = await Calendar.findById(foundEvent.calendarId);
+		const foundUser = await User.findById(req.session.userId);
+				// const foundEvent = { name: 'Testing1',
+  		// 					 startDate: '2018-07-22',
+  		// 					 startTime: '03:00',
+  		// 					 endDate: '2018-07-22',
+  		// 					 endTime: '04:00',
+  		// 					 people: ['antying@gmail.com', 'something@gmail.com'],
+  		// 					 location: 'asdf',
+  		// 					 allDay: false };
 		res.render('events/edit.ejs', {
-			event: foundEvent
-			//calendar: foundCalendar
+			event: foundEvent,
+			calendar: foundCalendar,
+			user: foundUser
 		})
 
 	} catch (err) {
-		console.log(err, 'error with event delete route');
+		console.log(err, 'error with event edit route');
 	}
 });
 
@@ -227,19 +229,19 @@ router.get('/:id', async (req, res) => {
 
 	try {
 
-		//const foundEvent = await Event.findById(req.params.id);
-		//const foundCalendar = await Calendar.findById(foundEvent.calendarId);
-		const foundEvent = { name: 'Testing1',
-  							 startDate: '2018-07-22',
-  							 startTime: '03:00',
-  							 endDate: '2018-07-22',
-  							 endTime: '04:00',
-  							 people: ['antying@gmail.com', 'something@gmail.com'],
-  							 location: 'asdf',
-  							 allDay: false };
+		const foundEvent = await Event.findById(req.params.id);
+		const foundCalendar = await Calendar.findById(foundEvent.calendarId);
+		// const foundEvent = { name: 'Testing1',
+  // 							 startDate: '2018-07-22',
+  // 							 startTime: '03:00',
+  // 							 endDate: '2018-07-22',
+  // 							 endTime: '04:00',
+  // 							 people: ['antying@gmail.com', 'something@gmail.com'],
+  // 							 location: 'asdf',
+  // 							 allDay: false };
 		res.render('events/show.ejs', {
-			event: foundEvent
-			//calendar: foundCalendar
+			event: foundEvent,
+			calendar: foundCalendar
 		})
 	} catch (err) {
 		console.log(err, 'error with event show route')

@@ -98,7 +98,7 @@ router.get('/new', async (req, res) => {
 
 //CREATE EVENT ROUTE
 router.post('/', async (req, res) => {
-	try{
+	try {
 
 		//change allDay from on to true/false
 		if(req.body.allDay === 'on') {
@@ -106,12 +106,32 @@ router.post('/', async (req, res) => {
 		} else {
 			req.body.allDay = false;
 		};
-	
+
+		console.log(req.body)
+
+		 
+		const createdEvent = await Event.create(req.body);
+		//find the calendar we are adding our new event to. // 
+		const foundCalendar = await Calendar.findById(req.body.calendarId)
+		foundCalendar.events.push(createdEvent) 
+		foundCalendar.save();
+
+		//need to find which calendar the user is using
+		const foundUser = await User.findById(req.session.userId);
+
+		for(let i = 0; i < foundUser.calendars.length; i++) {
+			if(foundUser.calendars[i].id === req.body.calendarId)
+				foundUser.calendars[i].events.push(createdEvent);
+		}
+
+		foundUser.save();
+			
+		
 		//convert long string of people into different people that can saved into people array
 		let index = 0;
 	
-		//need to find which calendar the user is using
-		const foundUser = await User.findById(req.session.userId);
+		
+		
 	
 		//used to loop over and split all the different people/emails entered into req.body.people
 		while(req.body.people.indexOf('\r\n', index) !== -1) {
@@ -121,19 +141,30 @@ router.post('/', async (req, res) => {
 			if(prevIndex === 0) {
 				prevIndex = prevIndex - 1;
 			}
+			
 			//used to correctly splice the email address
 			const person = req.body.people.slice(prevIndex + 1, index);
-			console.log(person);
+			
 			index = index + 1;
 		}
 		const person = req.body.people.slice(index + 1);
-		console.log(person);
+		
 
-		res.send('you done posted')
+		// res.send('you done posted')
+		
+
+
+
+
+		
+		res.redirect('/user'); 
+
+	
+
 	} catch (err) {
 		console.log(err, 'error with event create route')
 	}
-})
+});
 
 
 //EDIT EVENT ROUTE

@@ -29,12 +29,12 @@
 			<textarea name='people' placeholder="Add Invitees"></textarea><br>
 			<input type="text" name="location" placeholder="Location"><br>
 			<button>Save</button>
-		</form>
-		<select>
+		<select name="calendarId">
 				<% for(let i = 0; i < user.calendars.length; i++) { %>
 					<option value="<%= user.calendars[i].id %>"><%= user.calendars[i].name %></option>
 				<% } %>	
 		</select>
+		</form>
 		
 	</main>
 

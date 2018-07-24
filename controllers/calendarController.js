@@ -56,7 +56,7 @@ router.post('/', async (req, res) => {
 		foundUser.calendars.push(newCalendar)
 		foundUser.save();
 		
-		res.redirect('/users')
+		res.redirect('/user')
 	} catch (err) {
 		console.log(err, 'error with create calendar route')
 	}

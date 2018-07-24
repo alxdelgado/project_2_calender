@@ -2,6 +2,16 @@
 <html>
 <head>
 	<title>Create New Appt</title>
+	<script type="text/javascript" src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js></script>
+	<style>
+		#personDiv {
+			position: relative;
+		}
+		#addPerson {
+			position: absolute;
+			bottom: 0;
+		}
+	</style>
 </head>
 <body>
 
@@ -13,6 +23,12 @@
 
 	<main>
 		<h2>Create New Appointment</h2>
+		Calendar: <br>
+		<select>
+			<% for(let i = 0; i < user.calendars.length; i++) { %>
+				<option name='calendarId' value="<%= user.calendars[i].id %>"><%= user.calendars[i].name %></option>
+			<% } %>	
+		</select><br><br>
 		<form method='POST' action='/events/'>
 			Appointment Name:<br>
 			<input type="text" name="name" placeholder="Appointment Name" autofocus><br><br>
@@ -20,23 +36,22 @@
 			<input type="date" name="startDate" value="<%=timeArray[0]%>"><br>
 			Start Time: <br>
 			<input type="time" name="startTime" value='<%=timeArray[1]%>'><br><br>
-				All Day <input type="checkbox" name="allDay"><br><br>
-			End Date: <br>
-			<input type="date" name="endDate" value='<%=timeArray[2]%>'><br>
-			End Time: <br>
-			<input type="time" name="endTime" value='<%=timeArray[3]%>'><br><br>
-
-			<textarea name='people' placeholder="Add Invitees"></textarea><br>
-			<input type="text" name="location" placeholder="Location"><br>
+				All Day <input type="checkbox" name="allDay" id='allDay'><br><br>
+			<h3 class='end'>End Date:</h3>
+			<input type="date" name="endDate" value='<%=timeArray[2]%>' class='end'><br>
+			<h3 class="end">End Time: </h3>
+			<input type="time" name="endTime" value='<%=timeArray[3]%>' class='end'><br><br>
+			<input type="text" name="location" placeholder="Location"><br><br>
+			<div id='personDiv'>
+				<input type="text" name="person1" placeholder="Add Attendee"> <button id='addPerson'>Add Another Person</button><br>
+			</div><br>
+			
 			<button>Save</button>
 		</form>
-		<select>
-				<% for(let i = 0; i < user.calendars.length; i++) { %>
-					<option value="<%= user.calendars[i].id %>"><%= user.calendars[i].name %></option>
-				<% } %>	
-		</select>
+
 		
 	</main>
 
+	<script type="text/javascript" src='/js/event.js'></script>
 </body>
 </html>

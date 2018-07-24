@@ -10,17 +10,26 @@
 		margin: 0;
 		padding: 0px 0 70px 0;
 		border: 1px solid gray;
+		background-color: lightblue;
 
 	}
 	.dayName {
 		padding: 5px 0 20px 0;
 		text-align: center;
+		background-color: lightgray;
 	}
 	h4{
 		margin: 5px 0 0 5%;
 	}
 	small {
 		margin: 2px 0 0 5%;
+	}
+	h3, h2, h1{
+		text-align: center;
+	}
+	#container {
+		margin: 0 auto;
+		padding: 0 0 0 5%;
 	}
 </style>
 <body>
@@ -35,23 +44,20 @@
   <h1><%=user.username%>'s Calendar</h1>
 
   <div class="month">      
-  <ul>
-    <li class="prev">&#10094;</li>
-    <li class="next">&#10095;</li>
-    <li>
-      <%=monthName%><br>
-      <span><%=year%></span>
-    </li>
-  </ul>
+    <h2>&#10094;&#10094;&nbsp;&nbsp;&nbsp;<%=year%>&nbsp;&nbsp;&nbsp;&#10095;&#10095;</h2>
+ 	<h3>&#10094;&#10094;&nbsp;&nbsp;&nbsp;<%=monthName%>&nbsp;&nbsp;&nbsp;&#10095;&#10095;</h3>
+
 </div>
 
-<%for(let i = 0; i < 7; i++) {%>
+<div id='container'>
+
+<%for(let i = 0; i < 7; i++) { %>
 	<div class="calendarDiv dayName"><h4><%=dayNames[i]%></h4></div>
 <% } %>
 
 <%for(let i = 0; i < startDate; i++) {%>
 	<a href="#">
-		<div class='calendarDiv'>blanks</div>
+		<div class='calendarDiv'>&nbsp;</div>
 	</a>
 <% } %>
 
@@ -60,6 +66,7 @@
 		<div class='calendarDiv'><small><%=i%></small></div>
 	</a>
 <% } %>
+</div>
 
 </body>
 </html>

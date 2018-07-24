@@ -107,6 +107,7 @@ router.post('/', async (req, res) => {
 			req.body.allDay = false;
 		};
 	
+		
 		//convert long string of people into different people that can saved into people array
 		let index = 0;
 	

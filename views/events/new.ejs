@@ -24,12 +24,14 @@
 	<main>
 		<h2>Create New Appointment</h2>
 		Calendar: <br>
-		<select name='calendarId'>
-			<% for(let i = 0; i < user.calendars.length; i++) { %>
-				<option name='calendarId' value="<%= user.calendars[i].id %>"><%= user.calendars[i].name %></option>
-			<% } %>	
-		</select><br><br>
+
 		<form method='POST' action='/events/'>
+			<select name='calendarId'>
+				<% for(let i = 0; i < user.calendars.length; i++) { %>
+					<option value="<%= user.calendars[i].id %>"><%= user.calendars[i].name %></option>
+				<% } %>	
+			</select><br><br>
+		
 			Appointment Name:<br>
 			<input type="text" name="name" placeholder="Appointment Name" autofocus><br><br>
 			Start Date:<br>

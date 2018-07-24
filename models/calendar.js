@@ -4,8 +4,8 @@ const Event = require('./event');
 
 
 const calendarSchema = new mongoose.Schema({
-	name: {type: String, required: true, unique: true},
-	color: {type: String, unique: true, default: 'Blue'},
+	name: {type: String, required: true},
+	color: {type: String, default: 'Blue'},
 	events: [Event.schema], 
 	userId: String
 });

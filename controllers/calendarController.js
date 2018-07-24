@@ -34,6 +34,25 @@ router.get('/new', async (req, res) => {
 	}
 });
 
+// INDEX CALENDAR ROUTE
+router.get('/', async (req, res) => {
+	try {
+		//find user
+		const foundUser = await User.findById(req.session.userId);
+		//render index page 
+		res.render('calendars/index.ejs', {
+			user: foundUser
+		})
+
+
+	} catch (err) {
+		console.log(err, 'error with calendar index route')
+	}
+
+
+
+})
+
 // CREATE CALENDAR ROUTE
 router.post('/', async (req, res) => {
 	try{
@@ -64,18 +83,18 @@ router.post('/', async (req, res) => {
 
 
 //EDIT CALENDAR ROUTE
-router.get('/:id/edit', async (req, res) => {
-	try {
-		const foundCalendar = await Calendar.findById(req.params.id);
-		res.render('calendars/edit.ejs', {
-			calendar: foundCalendar, 
-			uniqueColor: false
-		});
+// router.get('/:id/edit', async (req, res) => {
+// 	try {
+// 		const foundCalendar = await Calendar.findById(req.params.id);
+// 		res.render('calendars/edit.ejs', {
+// 			calendar: foundCalendar, 
+// 			uniqueColor: false
+// 		});
 
-	} catch (err) {
-		console.log(err, 'error with edit calendar route');
-	}
-});
+// 	} catch (err) {
+// 		console.log(err, 'error with edit calendar route');
+// 	}
+// });
 
 
 //UPDATE CALENDAR ROUTE
@@ -86,10 +105,12 @@ router.put('/:id', async (req, res) => {
 		const foundCalendar = await Calendar.findById(req.params.id);
 		for (let i = 0; i < foundUser.calendars.length; i++) {
 			if(req.body.color === foundUser.calendars[i].color) {
-				res.render('calendars/edit.ejs', {
-					calendar: foundCalendar,
-					uniqueColor: true
-				});
+				if(req.params.id !== foundUser.calendars[i].id){
+					res.render('calendars/edit.ejs', {
+						calendar: foundCalendar,
+						uniqueColor: true
+					});
+				}
 			}
 		}
 
@@ -132,6 +153,9 @@ router.delete('/:id', async (req, res) => {
 		console.log(err, 'error with delete calendar route')
 	}
 });
+
+
+
 
 
 module.exports  = router;

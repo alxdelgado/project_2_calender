@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
   try {
 
 
-    if(req.session.loggedIn === true) {
+    if(req.session.logged === true) {
       res.redirect('/user/' + req.session.userId)
     } else {
       res.render('user/login.ejs', {

@@ -183,6 +183,8 @@ router.get('/:id/:year/:month', async (req, res) => {
             }
           }
         }
+
+        console.log(monthDays)
   
   
         if(req.params.id !== req.session.userId) {

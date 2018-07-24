@@ -166,15 +166,17 @@ router.get('/:id/:year/:month', async (req, res) => {
 
         let monthDays = monthRange[1];
 
-  
+      
         const foundUser = await User.findById(req.session.userId);
-        const allCalendars = await Calendar.find({'userId': req.session.id});
+        const allCalendars = foundUser.calendars;
         const allEvents = [];
+        
   
         for(let i = 0; i < allCalendars.length; i++) {
           const foundEvents = await Event.find({'calendarId': allCalendars[i].id})
           allEvents.push(foundEvents);
         }
+
 
         const currentEvents = [];
 
@@ -188,7 +190,7 @@ router.get('/:id/:year/:month', async (req, res) => {
             }
           }
         }
-  
+
   
         if(req.params.id !== req.session.userId) {
           res.redirect('/user/' + req.session.userId);

@@ -13,6 +13,14 @@
 		background-color: lightblue;
 
 	}
+	.event {
+		display: inline-block;
+		width: 90%;
+		margin: 0;
+		padding: 0;
+		border: 1px solid orange;
+		background-color: red;
+	}
 	.dayName {
 		padding: 5px 0 20px 0;
 		text-align: center;
@@ -64,8 +72,17 @@
 <% } %>
 
 <% for (let i = 1; i <= monthDays; i++) { %>
-	<a href="#">
-		<div class='calendarDiv'><small><%=i%></small></div>
+	<a href="/events/new">
+		<div class='calendarDiv'>
+			<small><%=i%></small><br>
+			<% for (let j = 0; j < events.length; j++) { -%>
+				<% if(events[j].startDate.slice(8, 10) == i) {%>
+					<a href="/events/<%=events[j].id%>">
+						<div class='event'><%=events[j].name%></div><br>
+					</a>
+				<% } %>
+			<% } -%>
+		</div>
 	</a>
 <% } %>
 </div>

@@ -24,7 +24,7 @@ $button.on('click', (event) => {
 	index++;
 
 	//add new input with a new name of person/Index
-	const $input = $(`<input type="text" name="person${index}" placeholder="Add Attendee"><br>`);
+	const $input = $(`<input type="text" name="person[]" placeholder="Add Attendee" autofocus><br>`);
 
 	//add the new input to the personDiv
 	$personDiv.append($input);

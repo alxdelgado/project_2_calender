@@ -100,6 +100,7 @@ router.get('/new', async (req, res) => {
 router.post('/', async (req, res) => {
 	try {
 
+
 		//change allDay from on to true/false
 		if(req.body.allDay === 'on') {
 			req.body.allDay = true;
@@ -107,6 +108,16 @@ router.post('/', async (req, res) => {
 			req.body.allDay = false;
 		};
 
+		req.body.people = [];
+		//add the people listed by the user in the req.body
+		for(let i = 0; i < req.body['person[]'].length; i++) {
+			if(req.body['person[]'][i] === '') {
+
+			} else {
+				req.body.people.push(req.body['person[]'][i])
+			}
+			
+		}
 		 
 		const createdEvent = await Event.create(req.body);
 		//find the calendar we are adding our new event to. // 
@@ -124,36 +135,8 @@ router.post('/', async (req, res) => {
 
 		foundUser.save();
 
-		
-		//convert long string of people into different people that can saved into people array
-		// let index = 0;
 	
-		
-		
-	
-		//used to loop over and split all the different people/emails entered into req.body.people
-		// while(req.body.people.indexOf('\r\n', index) !== -1) {
-		// 	let prevIndex = index;
-		// 	index = req.body.people.indexOf('\r\n', index);
-		// 	//save the string to the calendar being selected
-		// 	if(prevIndex === 0) {
-		// 		prevIndex = prevIndex - 1;
-		// 	}
-			
-		// 	//used to correctly splice the email address
-		// 	const person = req.body.people.slice(prevIndex + 1, index);
-			
-		// 	index = index + 1;
-		// }
-		// const person = req.body.people.slice(index + 1);
-		
-
-		// res.send('you done posted')
-
-		
 		res.redirect('/user'); 
-
-	
 
 	} catch (err) {
 		console.log(err, 'error with event create route')
@@ -167,14 +150,7 @@ router.get('/:id/edit', async (req, res) => {
 		const foundEvent = await Event.findById(req.params.id);
 		const foundCalendar = await Calendar.findById(foundEvent.calendarId);
 		const foundUser = await User.findById(req.session.userId);
-				// const foundEvent = { name: 'Testing1',
-  		// 					 startDate: '2018-07-22',
-  		// 					 startTime: '03:00',
-  		// 					 endDate: '2018-07-22',
-  		// 					 endTime: '04:00',
-  		// 					 people: ['antying@gmail.com', 'something@gmail.com'],
-  		// 					 location: 'asdf',
-  		// 					 allDay: false };
+
 		res.render('events/edit.ejs', {
 			event: foundEvent,
 			calendar: foundCalendar,

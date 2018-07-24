@@ -32,23 +32,25 @@
 			Appointment Name:<br>
 			<input type="text" name="name" value="<%=event.name%>" autofocus><br><br>
 			Start Date:<br>
-			<input type="date" name="startDate" value="<%=timeArray[0]%>"><br>
+			<input type="date" name="startDate" value="<%=event.startDate%>"><br>
 			Start Time: <br>
-			<input type="time" name="startTime" value='<%=timeArray[1]%>'><br><br>
-				All Day <input type="checkbox" name="allDay" id='allDay' 
+			<input type="time" name="startTime" value='<%=event.startTime%>'><br><br>
+			All Day <input type="checkbox" name="allDay" id='allDay' 
 				<%if(event.allDay === true) {%>
 					checked
 				<% } %>
-				><br><br>
+				><br><br>	
 			<h3 class='end'>End Date:</h3>
-			<input type="date" name="endDate" value='<%=timeArray[2]%>' class='end'><br>
+			<input type="date" name="endDate" value='<%=event.endDate%>' class='end'><br>
 			<h3 class="end">End Time: </h3>
-			<input type="time" name="endTime" value='<%=timeArray[3]%>' class='end'><br><br>
+			<input type="time" name="endTime" value='<%=event.endTime%>' class='end'><br><br>
+			Location:<br>
 			<input type="text" name="location" value="<%=event.location%>"><br><br>
+			People:<br>
 			<div id='personDiv'>
 				<input type="text" name="person1" value="<%=event.people[0]%>"> <button id='addPerson'>Add Another Person</button><br>
-				<% for (event i = 1; i < event.people.length; i++) { -%>
-					<input type="text" name="person<%=i+1%>" value="<%=event.people[i]%>">
+				<% for (let i = 1; i < event.people.length; i++) { -%>
+					<input type="text" name="person<%=i+1%>" value="<%=event.people[i]%>"><br>
 				<% } -%>
 			</div><br>
 			<input type="hidden" name="personsIndex" value='<%=event.people.length%>' id='personIndex'>

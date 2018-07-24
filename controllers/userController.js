@@ -24,9 +24,11 @@ router.get('/calenderTest', (req, res) => {
 router.get('/', async (req, res) => {
   
   try {
+    console.log(req.session)
 
-
-    if(req.session.loggedIn === true) {
+    if(req.session.logged === true) {
+       
+      
       res.redirect('/user/' + req.session.userId)
     } else {
       res.render('user/login.ejs', {
@@ -72,7 +74,7 @@ router.put('/:id/preferences', async (req, res) => {
     const updatedUser = await User.findById(req.params.id);
     updatedUser.preference = req.body.preference; 
     updatedUser.save(); 
-    res.redirect('/user'); 
+    res.redirect('/user/'); 
 
 
   } catch(err) {

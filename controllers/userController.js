@@ -183,14 +183,12 @@ router.get('/:id/:year/:month', async (req, res) => {
             }
           }
         }
-
-        console.log(monthDays)
   
   
         if(req.params.id !== req.session.userId) {
           res.redirect('/user/' + req.session.userId);
         } else {
-          console.log(foundUser, allCalendars, currentEvents, monthNumber, yearNumber, startDay, monthDays);
+          //console.log(foundUser, allCalendars, currentEvents, monthNumber, yearNumber, startDay, monthDays);
           res.render('user/home.ejs', {
             user: foundUser,
             calendars: allCalendars, 
@@ -199,7 +197,8 @@ router.get('/:id/:year/:month', async (req, res) => {
             monthNumber: monthNumber,
             year: yearNumber,
             startDate: startDay,
-            monthDays: monthDays
+            monthDays: monthDays,
+            dayNames: dayNames
           })
       }
     }

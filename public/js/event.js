@@ -3,7 +3,7 @@ console.log('Javascript is linked');
 const $button = $('#addPerson');
 const $personDiv = $('#personDiv');
 const $allDay = $('#allDay');
-
+const $personIndex = $('#personIndex');
 const $end = $('.end');
 
 //check if all day is checked or not
@@ -16,19 +16,19 @@ if($allDay.is(':checked')) {
 }
 
 
-let index = 2;
+let index = $personIndex.val();
 
 $button.on('click', (event) => {
 	//prevent button from submitting the form
 	event.preventDefault();
+	index++;
 
 	//add new input with a new name of person/Index
 	const $input = $(`<input type="text" name="person${index}" placeholder="Add Attendee"><br>`);
 
 	//add the new input to the personDiv
 	$personDiv.append($input);
-
-	index++;
+	$personIndex.val(index);
 })
 
 //event listener on all day checkbox

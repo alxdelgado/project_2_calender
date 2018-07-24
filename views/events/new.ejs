@@ -24,7 +24,7 @@
 	<main>
 		<h2>Create New Appointment</h2>
 		Calendar: <br>
-		<select>
+		<select name='calendarId'>
 			<% for(let i = 0; i < user.calendars.length; i++) { %>
 				<option name='calendarId' value="<%= user.calendars[i].id %>"><%= user.calendars[i].name %></option>
 			<% } %>	
@@ -45,6 +45,7 @@
 			<div id='personDiv'>
 				<input type="text" name="person1" placeholder="Add Attendee"> <button id='addPerson'>Add Another Person</button><br>
 			</div><br>
+			<input type="hidden" name="personsIndex" value='1' id='personIndex'>
 			
 			<button>Save</button>
 		</form>

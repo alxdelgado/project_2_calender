@@ -2,6 +2,16 @@
 <html>
 <head>
 	<title>Edit <%=event.name%></title>
+	<script type="text/javascript" src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js></script>
+	<style>
+		#personDiv {
+			position: relative;
+		}
+		#addPerson {
+			position: absolute;
+			bottom: 0;
+		}
+	</style>
 </head>
 <body>
 
@@ -13,33 +23,41 @@
 
 	<main>
 		<h2>Edit <%=event.name%></h2>
-		<form method='POST' action='/events/<%=event.id%>?_method=PUT'>
+		<select name='calendarId'>
+			<% for(let i = 0; i < user.calendars.length; i++) { %>
+				<option name='calendarId' value="<%= user.calendars[i].id %>"><%= user.calendars[i].name %></option>
+			<% } %>	
+		</select><br><br>
+		<form method='POST' action='/events/'>
 			Appointment Name:<br>
 			<input type="text" name="name" value="<%=event.name%>" autofocus><br><br>
 			Start Date:<br>
-			<input type="date" name="startDate" value="<%=event.startDate%>"><br>
+			<input type="date" name="startDate" value="<%=timeArray[0]%>"><br>
 			Start Time: <br>
-			<input type="time" name="startTime" value='<%=event.startTime%>'><br><br>
-			All Day <input type="checkbox" name="allDay"
-				<% if(event.allDay === true) {%>
+			<input type="time" name="startTime" value='<%=timeArray[1]%>'><br><br>
+				All Day <input type="checkbox" name="allDay" id='allDay' 
+				<%if(event.allDay === true) {%>
 					checked
 				<% } %>
 				><br><br>
-			End Date: <br>
-			<input type="date" name="endDate" value='<%=event.endDate%>'><br>
-			End Time: <br>
-			<input type="time" name="endTime" value='<%=event.endTime%>'><br><br>
-
-			<textarea name='people'"><%=event.people%></textarea><br>
-			<input type="text" name="location" value="<%=event.location%>"><br>
+			<h3 class='end'>End Date:</h3>
+			<input type="date" name="endDate" value='<%=timeArray[2]%>' class='end'><br>
+			<h3 class="end">End Time: </h3>
+			<input type="time" name="endTime" value='<%=timeArray[3]%>' class='end'><br><br>
+			<input type="text" name="location" value="<%=event.location%>"><br><br>
+			<div id='personDiv'>
+				<input type="text" name="person1" value="<%=event.people[0]%>"> <button id='addPerson'>Add Another Person</button><br>
+				<% for (event i = 1; i < event.people.length; i++) { -%>
+					<input type="text" name="person<%=i+1%>" value="<%=event.people[i]%>">
+				<% } -%>
+			</div><br>
+			<input type="hidden" name="personsIndex" value='<%=event.people.length%>' id='personIndex'>
+			
 			<button>Save</button>
 		</form>
-		<select>
-			<option value="<%= %>"></option>
-		</select>
 	
 
 	</main>
-
+	<script type="text/javascript" src='/js/event.js'></script>
 </body>
 </html>

@@ -24,11 +24,14 @@ router.get('/calenderTest', (req, res) => {
 router.get('/', async (req, res) => {
   
   try {
-    console.log(req.session)
+    
 
-    if(req.session.logged === true) {
+
        
       
+
+
+    if(req.session.logged === true) {
       res.redirect('/user/' + req.session.userId)
     } else {
       res.render('user/login.ejs', {

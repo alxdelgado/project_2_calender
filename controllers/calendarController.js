@@ -6,15 +6,17 @@ const Event = require('../models/event');
 const Calendar = require('../models/calendar');
 
 
-// Make middleware to redirect to login unless user is logged in. // 
-router.use('/login', (req, res, next) => {
-	console.log('getting here')
-  if(!req.session.logged) {
-  	res.redirect('/user/login')
-  } else {
-  	next(err); 
-  }
 
+
+
+// Make middleware to redirect to login unless user is logged in. // 
+router.use((req, res, next) => {
+	// console.log('getting here')
+  if(req.session.logged !== true) {
+  	res.redirect('/user')
+  } else {
+  	next(); 
+  }
 }); 
 
 

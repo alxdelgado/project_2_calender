@@ -25,12 +25,6 @@ router.get('/', async (req, res) => {
   
   try {
     
-
-
-       
-      
-
-
     if(req.session.logged === true) {
       res.redirect('/user/' + req.session.userId)
     } else {

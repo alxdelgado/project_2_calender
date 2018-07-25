@@ -14,6 +14,7 @@ const eventController = require('./controllers/eventController');
 const userController = require('./controllers/userController');
 const calendarController = require('./controllers/calendarController');
 const authController = require('./controllers/authController');
+const taskController = require('./controllers/taskController');
 
 
 
@@ -38,6 +39,7 @@ app.use('/events', eventController);
 app.use('/user', userController);
 app.use('/calendar', calendarController);
 app.use('/auth', authController); 
+app.use('/task', taskController); 
 
 
 // login // 

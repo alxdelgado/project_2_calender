@@ -59,7 +59,6 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
 	try{
 		const foundUser = await User.findById(req.session.userId);
-		console.log(foundUser)
 		for (let i = 0; i < foundUser.calendars.length; i++) {
 			if(req.body.color === foundUser.calendars[i].color) {
 				res.render('calendar/new.ejs', {

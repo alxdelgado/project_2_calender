@@ -7,20 +7,24 @@
 </head>
 <body>
 	<header>
-		<nav>
+<!-- 		<nav>
 			<a href="/user">Cancel</a>
-		</nav>
+		</nav> -->
 	</header>
 
 	<main>
+		<hr>
 		<form method='POST' action='/calendar/'>
 			<h4>Enter Calendar Name:</h4>
 			<input type="text" name="name" placeholder="Calendar Name" required><br><br>
 			<small>Pick Calendar Color:</small><br>
 			<input type="color" name="color" value='#0000FF'>
-			<br><br>
-			<button>Save</button>
+			<br><br><hr>
+			<button>Submit</button>
 
+		</form>
+		<form action='/user'>
+			<button>Cancel</button>
 		</form>
 	</main>
 

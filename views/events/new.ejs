@@ -18,23 +18,24 @@
 <body>
 
 	<header>
-		<nav>
+<!-- 		<nav>
 				<a href="/user">Cancel</a>
-		</nav>
+		</nav> -->
 	</header>
 
 	<main>
-		<h2>Create New Appointment</h2>
+		<h2>Create New Appointment</h2><hr>
 		<small>Calendar:</small> <br>
 		
 		<form method='POST' action='/events/'>
+
 			<select name='calendarId'>
 			<% for(let i = 0; i < user.calendars.length; i++) { %>
 				<option value="<%= user.calendars[i].id %>"><%= user.calendars[i].name %></option>
 			<% } %>	
-		</select><br><br>
+		</select><a href="/calendar/new"><button id='addCalendar' type='button'>+</button></a><br><br>
 			<small>Appointment Name:</small><br>
-			<input type="text" name="name" placeholder="Appointment Name" autofocus required><br><br>
+			<input type="text" name="name" placeholder="Appointment Name" autofocus required><br><hr>
 			<small>Start Date:</small><br>
 			<input type="date" name="startDate" value="<%=timeArray[0]%>"><br>
 			<small>Start Time:</small> <br>
@@ -43,13 +44,18 @@
 			<small class='end'>End Date:</small><br>
 			<input type="date" name="endDate" value='<%=timeArray[2]%>' class='end'><br>
 			<small class="end">End Time: </small><br>
-			<input type="time" name="endTime" value='<%=timeArray[3]%>' class='end'><br><br>
-			<input type="text" name="location" placeholder="Location"><br><br>
+			<input type="time" name="endTime" value='<%=timeArray[3]%>' class='end'><br><hr>
+			<small>Location:</small><br>
+			<input type="text" name="location" placeholder="Location"><br><hr>
+			<small>Attendees:</small><br>
 			<div id='personDiv'>
-				<input type="text" name="person[]" placeholder="Add Attendee"> <button id='addPerson'>Add Another Person</button><br>
+				<input type="text" name="person[]" placeholder="Add Attendee"> <button id='addPerson'>+</button><br>
 			</div><br>
-			
-			<button>Save</button>
+			<hr>
+			<button>Submit</button>
+		</form>
+		<form action='/user'>
+			<button>Cancel</button>
 		</form>
 		
 	</main>

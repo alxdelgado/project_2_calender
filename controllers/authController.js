@@ -26,7 +26,7 @@ router.post('/register', async (req, res) => {
     req.session.userId = createdUser.id;
     req.session.username = createdUser.username; 
     req.session.logged = true;
-    res.redirect('/user/' + req.session.userId + '/preferences')  
+    res.redirect('/user/' + req.session.userId /* + '/preferences'*/)  
   
   } catch (err) {
     console.log(err, 'error with login register route')

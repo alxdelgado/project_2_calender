@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <header>
+    <nav>
+      <li><a href="/user">Cancel</a></li>
+    </nav>
+  </header>
+  <main>
+    <form method="POST" action="/task/<%= user.openTasks.id %>?_method=PUT">
+      Edit Task Name:<br/>
+      <input type="text" name="name" value="<%= user.openTasks.name %>" class="task"><br/>
+      Edit Task Due Date:<br/>
+      <input type="date" name="dueDate" value="<%= user.openTasks.dueDate %>" class="task"><br/>
+      Edit Task Priority:<br/>
+      <input type="number" name="name" value="<%= user.openTasks.priority %>" class="task" min="1" max="4"><br/>
+    </form>
+  </main>
+</body>
+</html>

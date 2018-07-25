@@ -6,6 +6,15 @@ const User = require('../models/user');
 const Calendar = require('../models/calendar');
 const Event = require('../models/event');
 
+
+router.use((req, res, next) => {
+  if(req.session.logged !== true ) {
+  	res.redirect('/user')
+  } else {
+  	next(); 
+  }
+});
+
 // making middleware to redirect to login page unless user is logged in
 router.use((req, res, next) => {
 

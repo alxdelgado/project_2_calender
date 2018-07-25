@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-
+const User = require('./user'); 
 
 const taskSchema = new mongoose.Schema({
 	name: {type: String, required: true},

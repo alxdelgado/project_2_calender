@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>New Calendar</title>
+	<link rel="stylesheet" type="text/css" href="/css/new.css">
 </head>
 <body>
 	<header>
@@ -13,8 +14,7 @@
 	<main>
 		<form method='POST' action='/calendar/'>
 			<h4>Enter Calendar Name:</h4>
-			<input type="text" name="name" placeholder="Calendar Name"><br>
-			<h4>Please Pick a Calendar Color:</h4>
+			<input type="text" name="name" placeholder="Calendar Name" required
 			<input type="color" name="color" value='#0000FF'>
 			<br><br>
 			<button>Save</button>

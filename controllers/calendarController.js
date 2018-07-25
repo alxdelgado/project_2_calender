@@ -144,7 +144,15 @@ router.delete('/:id', async (req, res) => {
 			const deletedEvent = await Event.findByIdAndRemove(foundCalendar.event[i].id);
 		}
 
-		//delete the calendar
+		//find user and delete calendar from calendars array
+		const foundUser = User.findById(req.session.id);
+		for(let i = 0; i < foundUser.calendars.length; i++) {
+			if(foundUser.calendars[i].id === foundCalendar.id) {
+				foundUser.calendars.splice(i, 1);
+			}
+		}
+
+		//delete the calendar from Calendar model
 		const deletedCalendar = await Calendar.findByIdAndRemove(req.params.id);
 
 		res.redirect('/user');

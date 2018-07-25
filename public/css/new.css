@@ -14,8 +14,9 @@ h4{
 main{
 	display: inline-block;
 	background-color: rgba(0, 0, 0, 0.35);
-	padding: 30px 50px 50px 50px;
+	padding: 15px 50px 50px 50px;
 	margin: 10px;
+	box-shadow: 5px 5px 5px rgba(229, 71, 60, 0.3);
 
 }
 input {
@@ -42,8 +43,9 @@ input {
 }
 
 body {
-	background-color: rgba(0, 0, 0, .8);
+	background-image: linear-gradient(to right bottom, #343537, #555658, #78797c, #9c9fa1, #c3c6c8);
 	text-align: center;
+	height: 100vh;
 }
 
 button{

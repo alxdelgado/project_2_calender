@@ -8,6 +8,7 @@ body{
 }
 .image {
 	text-align: center;
+	
 }
 h1, h4, small{
 	font-family: 'Baloo Chettan', cursive;
@@ -23,7 +24,10 @@ small {
 main {
 	display: flex;
 	justify-content: space-around;
-	background-color: rgba(0, 0, 0, .5)
+	background-color: rgba(0, 0, 0, .5);
+	box-shadow: 5px 5px 5px rgba(229, 71, 60, 0.4);
+	margin: 0 15% 0 15%;
+	padding: 0 0 20px 0;
 }
 
 input { 

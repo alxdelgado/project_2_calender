@@ -4,6 +4,13 @@
   <title></title>
 </head>
 <style>
+  #tasklist {
+    display: inline-block;
+    border: 1px rgba(229, 71, 60, 0.5);
+    width: 20%;
+    margin: 0;
+    padding: 0px, 20px, 0px, 20px;
+}
 	.calendarDiv {
 		display: inline-block;
 		width: 13%;
@@ -61,8 +68,15 @@
     	<a href="/user/<%=user.id%>/<%=nextYear%>/<%=monthName%>">&#10095;&#10095;</a></h2>
  	<h3><a href="/user/<%=user.id%>/<%=prevMonthYear%>/<%=prevMonthName%>">&#10094;&#10094;</a>&nbsp;&nbsp;&nbsp;<%=monthName%>&nbsp;&nbsp;&nbsp;
  		<a href="/user/<%=user.id%>/<%=nextMonthYear%>/<%=nextMonthName%>">&#10095;&#10095;</a></h3>
-
 </div>
+
+<% for (let i = 0; i < user.openTasks.length; i++) { %>
+  <div id="taskList">
+    <h2><%= user.openTasks[i].name%></h2>
+    <h2><%= user.openTasks[i].color%></h2>
+  </div>
+<% } %>
+
 
 <div id='container'>
 

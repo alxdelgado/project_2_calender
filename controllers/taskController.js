@@ -47,6 +47,10 @@ router.put('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const createdTask = await Task.create(req.body);
+    const foundUser = await User.findById(req.session.userId); 
+    foundUser.openTasks.push(createdTask); 
+    foundUser.save();
+
     res.redirect('/user')
   } catch(err) {
     res.send(err); 

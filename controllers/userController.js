@@ -219,7 +219,6 @@ router.get('/:id/:year/:month', async (req, res) => {
             }
           }
         }
-
   
         if(req.params.id !== req.session.userId) {
           res.redirect('/user/' + req.session.userId);

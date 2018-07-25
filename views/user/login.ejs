@@ -2,31 +2,41 @@
 <html>
 <head>
   <title></title>
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan" rel="stylesheet">
   <script type="text/javascript" src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js></script>
+  <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 <body>
   <header>
     <h1>Welcome to Eaze Calendar</h1>
+    <h4>An Easy To Use Online Calendar For Organizing Your Life</h4>
+    <div class='image'>
+      <img src="https://freshcalendars.com/freshcalendars.png">
+    </div>
   </header>
   <main>
-    <h4>Login</h4>
-    <% if(message) {%>
-      <small><%=message%></small><br>
-    <% } %>
-    <br>
-    <form method="POST" action="/auth/login">
-      <input type="text" placeholder="username" name="username"><br/>
-      <input type="password" placeholder="password" name="password"><br/>
-      <button>Submit</button><br/>
-    </form>
+    <div class='login'>
+      <h1>Login</h1>
 
-    <h1>Register</h1>
-    <form method="POST" action="/auth/register">
-      Username: <input type="text" placeholder="username" name="username"><br/>
-      Password: <input type="password" placeholder="password" name="password" id='pass'><br/>
-      Confirm Password: <input type="password" placeholder="password" name="checkPassword" id='checkpass'></input><br/>
-      <button id='newUserButton'>Submit</button>
-    </form>
+      <form method="POST" action="/auth/login">
+        <input type="text" placeholder="Username" name="username" required><br/>
+        <input type="password" placeholder="Password" name="password" required><br/>
+        <button>Submit</button><br/>
+      </form>
+      <% if(message) {%>
+        <small><%=message%></small><br>
+      <% } %>
+    </div>
+
+    <div class="register">
+      <h1>Register</h1>
+      <form method="POST" action="/auth/register">
+        <input type="text" placeholder="Username" name="username" required><br/>
+        <input type="password" placeholder="Password" name="password" id='pass' required><br/>
+        <input type="password" placeholder="Confirm Password" name="checkPassword" id='checkpass' required></input><br/>
+        <button id='newUserButton'>Submit</button>
+      </form>
+    </div>
   </main>
 
 

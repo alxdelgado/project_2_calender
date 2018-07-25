@@ -1,0 +1,84 @@
+div img {
+	max-height: 200px;
+	max-width: 100%;
+
+}
+body{
+	background-image: url("https://www.planwallpaper.com/static/images/6790904-free-background-wallpaper.jpg")
+}
+.image {
+	text-align: center;
+}
+h1, h4, small{
+	font-family: 'Baloo Chettan', cursive;
+	text-align: center;
+	color: rgba(229, 71, 60, .75);
+}
+
+small {
+	color: white;
+	font-weight: lighter;
+}
+
+main {
+	display: flex;
+	justify-content: space-around;
+	background-color: rgba(0, 0, 0, .5)
+}
+
+input {
+	margin: 4px;
+	width: 150px;
+	height: 20px;
+	border-radius: 5px;
+	border: 3px solid rgba(229, 71, 60, 1);
+}
+
+form {
+	text-align: center;
+}
+
+body:before{
+  content:'';
+  height:100%;
+  display:inline-block;
+  vertical-align:middle;
+}
+button{
+  background:rgba(229, 71, 60, 1);
+  color:#fff;
+  border:none;
+  position:relative;
+  height:20px;
+  font-size:1em;
+  padding:0 2em;
+  margin: 4px;
+  cursor:pointer;
+  transition:300ms ease all;
+  outline:none;
+  text-align: center;
+}
+button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}

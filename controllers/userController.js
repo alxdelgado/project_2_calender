@@ -24,20 +24,12 @@ router.get('/calenderTest', (req, res) => {
 router.get('/', async (req, res) => {
   
   try {
-    
-
-
-       
-      
-
-
     if(req.session.logged === true) {
       res.redirect('/user/' + req.session.userId)
     } else {
       res.render('user/login.ejs', {
         message: req.session.message
       });
-
     }
 
   } catch(err) {
@@ -150,12 +142,49 @@ router.get('/:id/:year/:month', async (req, res) => {
       }
     } 
 
+
+
       //ensure the url path is an actual month
       if(monthNumber === '') {
         res.redirect('/user/' + req.session.userId);
       } else{
 
         const yearNumber = parseInt(req.params.year);
+        const prevYear = yearNumber - 1;
+        const nextYear = yearNumber + 1;
+
+        let prevMonthNumber;
+        let prevMonthName;
+        let nextMonthNumber;
+        let nextMonthName;
+        let prevMonthYear;
+        let nextMonthYear;
+
+        if(monthNumber === 1) {
+          prevMonthNumber = 12;
+          prevMonthName = 'December';
+          nextMonthNumber = 2;
+          nextMonthName = 'February';
+          prevMonthYear = yearNumber - 1;
+          nextMonthYear = yearNumber;
+
+        } else if (monthNumber === 12) {
+          prevMonthNumber = 11;
+          prevMonthName = 'November';
+          nextMonthNumber = 1;
+          nextMonthName = 'January';
+          prevMonthYear = yearNumber;
+          nextMonthYear = yearNumber + 1;
+        } else {
+          prevMonthNumber = monthNumber - 1;
+          prevMonthName = monthNames[prevMonthNumber - 1];
+          nextMonthNumber = monthNumber + 1;
+          nextMonthName = monthNames[nextMonthNumber - 1];
+          prevMonthYear = yearNumber;
+          nextMonthYear = yearNumber;
+        }
+
+
 
         //get the starting weekday of the month and the number of days in the month
         const monthRange = nodeCalendar.monthrange(yearNumber, monthNumber);
@@ -205,7 +234,13 @@ router.get('/:id/:year/:month', async (req, res) => {
             year: yearNumber,
             startDate: startDay,
             monthDays: monthDays,
-            dayNames: dayNames
+            dayNames: dayNames, 
+            prevYear: prevYear,
+            nextYear: nextYear,
+            prevMonthName: prevMonthName,
+            nextMonthName: nextMonthName,
+            prevMonthYear: prevMonthYear,
+            nextMonthYear: nextMonthYear
           })
       }
     }
@@ -216,11 +251,6 @@ router.get('/:id/:year/:month', async (req, res) => {
 })
 
 /////////////////////////
-
-
-
-
-
 
 
 /////////////////////////

@@ -23,14 +23,18 @@
 
 	<main>
 		<h2>Edit <%=event.name%></h2>
-		<select name='calendarId'>
-			<% for(let i = 0; i < user.calendars.length; i++) { %>
-				<option name='calendarId' value="<%= user.calendars[i].id %>"><%= user.calendars[i].name %></option>
-			<% } %>	
-		</select><br><br>
-		<form method='POST' action='/events/'>
+		<form method='POST' action='/events/<%=event.id%>?_method=PUT'>
+			<select name='calendarId'>
+				<% for(let i = 0; i < user.calendars.length; i++) { %>
+					<option name='calendarId' value="<%= user.calendars[i].id%>"
+						<%if(event.calendarId === user.calendars[i].id) {%>
+						selected
+						<%}%>
+						><%= user.calendars[i].name %></option>
+				<% } %>	
+			</select><br><br>
 			Appointment Name:<br>
-			<input type="text" name="name" value="<%=event.name%>" autofocus><br><br>
+			<input type="text" name="name" value="<%=event.name%>" autofocus required><br><br>
 			Start Date:<br>
 			<input type="date" name="startDate" value="<%=event.startDate%>"><br>
 			Start Time: <br>
@@ -48,12 +52,11 @@
 			<input type="text" name="location" value="<%=event.location%>"><br><br>
 			People:<br>
 			<div id='personDiv'>
-				<input type="text" name="person1" value="<%=event.people[0]%>"> <button id='addPerson'>Add Another Person</button><br>
+				<input type="text" name="person[]" value="<%=event.people[0]%>"> <button id='addPerson'>Add Another Person</button><br>
 				<% for (let i = 1; i < event.people.length; i++) { -%>
-					<input type="text" name="person<%=i+1%>" value="<%=event.people[i]%>"><br>
+					<input type="text" name="person[]" value="<%=event.people[i]%>"><br>
 				<% } -%>
 			</div><br>
-			<input type="hidden" name="personsIndex" value='<%=event.people.length%>' id='personIndex'>
 			
 			<button>Save</button>
 		</form>

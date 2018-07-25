@@ -48,14 +48,17 @@
       <li><a href="/calendar">Edit Calendars</a></li>
       <li><a href="/user/<%=user.id%>/preferences">Edit Preferences</a></li>
       <li><a href="/auth/logout">Logout</a></li>
+      <li><a href="/user">Today's Date</a></li>
     </ul>
   </header>
 
   <h1><%=user.username%>'s Calendar</h1>
 
   <div class="month">      
-    <h2>&#10094;&#10094;&nbsp;&nbsp;&nbsp;<%=year%>&nbsp;&nbsp;&nbsp;&#10095;&#10095;</h2>
- 	<h3>&#10094;&#10094;&nbsp;&nbsp;&nbsp;<%=monthName%>&nbsp;&nbsp;&nbsp;&#10095;&#10095;</h3>
+    <h2><a href="/user/<%=user.id%>/<%=prevYear%>/<%=monthName%>">&#10094;&#10094;</a>&nbsp;&nbsp;&nbsp;<%=year%>&nbsp;&nbsp;&nbsp;
+    	<a href="/user/<%=user.id%>/<%=nextYear%>/<%=monthName%>">&#10095;&#10095;</a></h2>
+ 	<h3><a href="/user/<%=user.id%>/<%=prevMonthYear%>/<%=prevMonthName%>">&#10094;&#10094;</a>&nbsp;&nbsp;&nbsp;<%=monthName%>&nbsp;&nbsp;&nbsp;
+ 		<a href="/user/<%=user.id%>/<%=nextMonthYear%>/<%=nextMonthName%>">&#10095;&#10095;</a></h3>
 
 </div>
 

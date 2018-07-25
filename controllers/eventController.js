@@ -107,6 +107,7 @@ router.post('/', async (req, res) => {
 		} else {
 			req.body.allDay = false;
 		};
+		console.log(req.body)
 
 		req.body.people = [];
 		//add the people listed by the user in the req.body
@@ -165,8 +166,101 @@ router.get('/:id/edit', async (req, res) => {
 //PUT EVENT ROUTE
 router.put('/:id', async (req, res) => {
 	try {
+		//change allDay from on to true/false
+		if(req.body.allDay === 'on') {
+			req.body.allDay = true;
+		} else {
+			req.body.allDay = false;
+		};
 
-		res.send('you edited the route')
+		req.body.people = [];
+		//add the people listed by the user in the req.body
+		for(let i = 0; i < req.body['person[]'].length; i++) {
+			if(req.body['person[]'][i] === '') {
+
+			} else {
+				req.body.people.push(req.body['person[]'][i])
+			}	
+		}
+		console.log(req.body)
+
+		const foundEvent = await Event.findById(req.params.id);
+
+		//check if the calendar has been updated
+		if(req.body.calendarId === foundEvent.calendarId) {
+			console.log('calendar was not changed')
+			//find and update the event in the event collection
+			const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body);
+			//find the calendar using the event
+			const foundCalendar = await Calendar.findById(updatedEvent.calendarId);
+			//find the user
+			const foundUser = await User.findById(req.session.userId);
+
+			//search over the calendar event's array to find and update the event
+			for(let i = 0; i < foundCalendar.events.length; i++) {
+				if(foundCalendar.events[i].id === updatedEvent.id) {
+					foundCalendar.events[i] = req.body
+				}
+			}
+			//save the calendar
+			foundCalendar.save();
+			//find and loop over the user's calendars and event and update the correct event
+			for(let i = 0; i < foundUser.calendars.length; i++) {
+				if(foundUser.calendars[i].id === updatedEvent.calendarId) {
+					for(let j = 0; j < foundUser.calendars[i].events.length; j++) {
+						foundUser.calendars[i].events[j] = req.body;
+					}
+				}
+			}	//save the user
+			foundUser.save();
+		} else {
+			console.log('calendar was changed')
+			//to be done if the calendar was changed by the user
+			//find the old calendar using old calendarID
+			const oldCalendar = await Calendar.findById(foundEvent.calendarId);
+			//update the event to have the new information
+			const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body);
+
+			//find the new calendar
+			const newCalendar = await Calendar.findById(updatedEvent.calendarId);
+
+			const foundUser = await User.findById(req.session.userId);
+
+			//loop over the old calendar events array and remove the event
+			for(let i = 0; i < oldCalendar.events.length; i++) {
+				if(updatedEvent.id === oldCalendar.events[i].id) {
+					oldCalendar.events.splice(i, 1);
+				}
+			}
+
+			oldCalendar.save()
+			//add the event to the new calendar
+			newCalendar.events.push(updatedEvent);
+			newCalendar.save()
+
+
+			//find the old calendar in the user model
+			for(let i = 0; i < foundUser.calendars.length; i++) {
+					if(foundUser.calendars[i].id === oldCalendar.id) {
+						for(let j = 0; j < foundUser.calendars[i].events.length; j++) {
+							if(foundUser.calendars[i].events[j].id === updatedEvent.id) {
+								foundUser.calendars[i].events.splice(j, 1);
+							}
+						}
+
+
+						//find the new calendar in the user and push the new event to it
+					} else if(foundUser.calendars[i].id === newCalendar.id) {
+						foundUser.calendars[i].events.push(updatedEvent);
+					}
+				}	
+
+
+
+		}
+
+		res.redirect('/user');
+
 
 	} catch (err) {
 		console.log(err, 'error with event put route')

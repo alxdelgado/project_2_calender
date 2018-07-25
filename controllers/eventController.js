@@ -92,7 +92,6 @@ router.get('/new', async (req, res) => {
 
 	if(foundUser.calendars.length > 0){
 		// console.log('error with the event/new route')
-		console.log(foundUser.calendars)  
 		res.render('events/new.ejs', {
 			timeArray: timeArray,
 			user: foundUser
@@ -116,7 +115,6 @@ router.post('/', async (req, res) => {
 		} else {
 			req.body.allDay = false;
 		};
-		console.log(req.body)
 
 		req.body.people = [];
 		//add the people listed by the user in the req.body
@@ -142,10 +140,7 @@ router.post('/', async (req, res) => {
 			if(foundUser.calendars[i].id === req.body.calendarId)
 				foundUser.calendars[i].events.push(createdEvent);
 		}
-
 		foundUser.save();
-
-	
 		res.redirect('/user'); 
 
 	} catch (err) {
@@ -191,13 +186,11 @@ router.put('/:id', async (req, res) => {
 				req.body.people.push(req.body['person[]'][i])
 			}	
 		}
-		console.log(req.body)
 
 		const foundEvent = await Event.findById(req.params.id);
 
 		//check if the calendar has been updated
 		if(req.body.calendarId === foundEvent.calendarId) {
-			console.log('calendar was not changed')
 			//find and update the event in the event collection
 			const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body);
 			//find the calendar using the event
@@ -223,7 +216,6 @@ router.put('/:id', async (req, res) => {
 			}	//save the user
 			foundUser.save();
 		} else {
-			console.log('calendar was changed')
 			//to be done if the calendar was changed by the user
 			//find the old calendar using old calendarID
 			const oldCalendar = await Calendar.findById(foundEvent.calendarId);
@@ -310,14 +302,7 @@ router.get('/:id', async (req, res) => {
 
 		const foundEvent = await Event.findById(req.params.id);
 		const foundCalendar = await Calendar.findById(foundEvent.calendarId);
-		// const foundEvent = { name: 'Testing1',
-  // 							 startDate: '2018-07-22',
-  // 							 startTime: '03:00',
-  // 							 endDate: '2018-07-22',
-  // 							 endTime: '04:00',
-  // 							 people: ['antying@gmail.com', 'something@gmail.com'],
-  // 							 location: 'asdf',
-  // 							 allDay: false };
+
 		res.render('events/show.ejs', {
 			event: foundEvent,
 			calendar: foundCalendar

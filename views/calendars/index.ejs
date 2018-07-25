@@ -2,21 +2,14 @@
 <html>
 <head>
 	<title><%=user.name%>'s Calendars</title>	
-	<style>
-		h4 {
-			margin: 10px 0;
-		}
-	</style>
+	<link href="https://fonts.googleapis.com/css?family=Baloo+Chettan" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/css/new.css">
 </head>
 <body>
 
-	<header>
-		<ul>
-			<li><a href="/user">Calendar Home</a></li>
-		</ul>
-	</header>
 
 	<main>
+		<hr>
 		<% for (let i = 0; i < user.calendars.length; i++) { -%>
 
 		<div>
@@ -27,9 +20,15 @@
 			<input type="color" name="color" value='<%=user.calendars[i].color%>'><br><br>
 			<button>Save Changes</button>
 			</form>
-		</div><br><br>
+
+		</div>
+		<hr>
 			
 		<% } -%>
+		<br><br>
+		<form action='/user'>
+			<button>Cancel</button>
+		</form>
 	</main>
 
 

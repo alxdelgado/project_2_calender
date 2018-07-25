@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Create New Appt</title>
+	<link href="https://fonts.googleapis.com/css?family=Baloo+Chettan" rel="stylesheet">
 	<script type="text/javascript" src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js></script>
 	<link rel="stylesheet" type="text/css" href="/css/new.css">
 	<style>
@@ -17,38 +18,44 @@
 <body>
 
 	<header>
-		<nav>
+<!-- 		<nav>
 				<a href="/user">Cancel</a>
-		</nav>
+		</nav> -->
 	</header>
 
 	<main>
-		<h2>Create New Appointment</h2>
-		Calendar: <br>
+		<h2>Create New Appointment</h2><hr>
+		<small>Calendar:</small> <br>
 		
 		<form method='POST' action='/events/'>
+
 			<select name='calendarId'>
 			<% for(let i = 0; i < user.calendars.length; i++) { %>
 				<option value="<%= user.calendars[i].id %>"><%= user.calendars[i].name %></option>
 			<% } %>	
-		</select><br><br>
-			Appointment Name:<br>
-			<input type="text" name="name" placeholder="Appointment Name" autofocus required><br><br>
-			Start Date:<br>
+		</select><a href="/calendar/new"><button id='addCalendar' type='button'>+</button></a><br><br>
+			<small>Appointment Name:</small><br>
+			<input type="text" name="name" placeholder="Appointment Name" autofocus required><br><hr>
+			<small>Start Date:</small><br>
 			<input type="date" name="startDate" value="<%=timeArray[0]%>"><br>
-			Start Time: <br>
+			<small>Start Time:</small> <br>
 			<input type="time" name="startTime" value='<%=timeArray[1]%>'><br><br>
-				All Day <input type="checkbox" name="allDay" id='allDay'><br><br>
-			<h3 class='end'>End Date:</h3>
+				<small>All Day</small> <input type="checkbox" name="allDay" id='allDay'><br><br>
+			<small class='end'>End Date:</small><br>
 			<input type="date" name="endDate" value='<%=timeArray[2]%>' class='end'><br>
-			<h3 class="end">End Time: </h3>
-			<input type="time" name="endTime" value='<%=timeArray[3]%>' class='end'><br><br>
-			<input type="text" name="location" placeholder="Location"><br><br>
+			<small class="end">End Time: </small><br>
+			<input type="time" name="endTime" value='<%=timeArray[3]%>' class='end'><br><hr>
+			<small>Location:</small><br>
+			<input type="text" name="location" placeholder="Location"><br><hr>
+			<small>Attendees:</small><br>
 			<div id='personDiv'>
-				<input type="text" name="person[]" placeholder="Add Attendee"> <button id='addPerson'>Add Another Person</button><br>
+				<input type="text" name="person[]" placeholder="Add Attendee"> <button id='addPerson'>+</button><br>
 			</div><br>
-			
-			<button>Save</button>
+			<hr>
+			<button>Submit</button>
+		</form>
+		<form action='/user'>
+			<button>Cancel</button>
 		</form>
 		
 	</main>

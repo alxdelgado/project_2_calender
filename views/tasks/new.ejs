@@ -2,24 +2,30 @@
 <html>
 <head>
   <title></title>
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/new.css">
 </head>
 <body>
 <header>
-  <nav>
+<!--   <nav>
     <a href="/user">Cancel</a>
-  </nav>
+  </nav> -->
 </header>
 <main>
   <h2>Create New Task</h2>
   <form method="POST" action="/task/">
-    Task Name:<br/>
+    <small>Task Name:</small><br/>
     <input type="text" name="name" placeholder="Task Name" autofocus required><br/>
-    Task Due Date:<br/>
+    <small>Task Due Date:</small><br/>
     <input type="date" name="dueDate" value="<%= user.openTasks.name %>" class="task"><br/>
-    Task Priority:<br/>
+    <small>Task Priority:</small><br/>
     <input type="number" name="priority" value="<% user.openTasks.priority %>" min="1" max="4"><br/>
     <button>Submit</button>
 
+  </form>
+
+  <form action='/user'>
+    <button>Cancel</button>
   </form>
 </main>
 </body>

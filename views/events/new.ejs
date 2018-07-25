@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Create New Appt</title>
+	<link href="https://fonts.googleapis.com/css?family=Baloo+Chettan" rel="stylesheet">
 	<script type="text/javascript" src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js></script>
 	<link rel="stylesheet" type="text/css" href="/css/new.css">
 	<style>
@@ -24,7 +25,7 @@
 
 	<main>
 		<h2>Create New Appointment</h2>
-		Calendar: <br>
+		<small>Calendar:</small> <br>
 		
 		<form method='POST' action='/events/'>
 			<select name='calendarId'>
@@ -32,16 +33,16 @@
 				<option value="<%= user.calendars[i].id %>"><%= user.calendars[i].name %></option>
 			<% } %>	
 		</select><br><br>
-			Appointment Name:<br>
+			<small>Appointment Name:</small><br>
 			<input type="text" name="name" placeholder="Appointment Name" autofocus required><br><br>
-			Start Date:<br>
+			<small>Start Date:</small><br>
 			<input type="date" name="startDate" value="<%=timeArray[0]%>"><br>
-			Start Time: <br>
+			<small>Start Time:</small> <br>
 			<input type="time" name="startTime" value='<%=timeArray[1]%>'><br><br>
-				All Day <input type="checkbox" name="allDay" id='allDay'><br><br>
-			<h3 class='end'>End Date:</h3>
+				<small>All Day</small> <input type="checkbox" name="allDay" id='allDay'><br><br>
+			<small class='end'>End Date:</small><br>
 			<input type="date" name="endDate" value='<%=timeArray[2]%>' class='end'><br>
-			<h3 class="end">End Time: </h3>
+			<small class="end">End Time: </small><br>
 			<input type="time" name="endTime" value='<%=timeArray[3]%>' class='end'><br><br>
 			<input type="text" name="location" placeholder="Location"><br><br>
 			<div id='personDiv'>

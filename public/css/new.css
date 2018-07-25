@@ -1,5 +1,29 @@
 
+h1, h2, h3, h4, small{
+	font-family: 'Baloo Chettan', cursive;
+	text-align: center;
+	color: rgba(229, 71, 60, .75);
+}
 
+div, form, main {
+	text-align: center;
+}
+
+input {
+	margin: 4px;
+	width: 150px;
+	height: 20px;
+	border-radius: 5px;
+	border: 3px solid rgba(229, 71, 60, 1);
+}
+
+#addPerson {
+	font-size: 10px;
+}
+
+body {
+	background-color: rgba(0, 0, 0, .8);
+}
 
 button{
   background:rgba(229, 71, 60, 1);

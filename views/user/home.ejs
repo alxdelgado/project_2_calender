@@ -8,12 +8,18 @@
 	body{
 		background-image: linear-gradient(to right bottom, #343537, #555658, #78797c, #9c9fa1, #c3c6c8);
 	}
+  .flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+  }
   #tasklist {
-    display: inline-block;
+    display: right;
     border: 1px rgba(229, 71, 60, 0.5);
     width: 20%;
     margin: 0;
-    padding: 0px, 20px, 0px, 20px;
+    padding: 0px, 50px, 0px, 50px;
 }
 	.calendarDiv {
 		display: inline-block;
@@ -68,6 +74,7 @@
       <a href="/user">Today's Date</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
   </header>
 
+<div class="flex-container"> 
   <h1><%=user.username%>'s Calendar</h1>
 
   <div class="month">      
@@ -77,13 +84,15 @@
  		<a href="/user/<%=user.id%>/<%=nextMonthYear%>/<%=nextMonthName%>">&#10095;&#10095;</a></h3>
 </div>
 
-<% for (let i = 0; i < user.openTasks.length; i++) { %>
   <div id="taskList">
-    <h2><%= user.openTasks[i].name%></h2>
-    <h2><%= user.openTasks[i].color%></h2>
+    <% for (let i = 0; i < user.openTasks.length; i++) { %>
+      <form method="POST" action="/task/<%= user.openTasks[i].id%>?_method=DELETE">
+        <h2><a href="#" onclick="event.target.parentNode.parentNode.submit()"><%= user.openTasks[i].name %></a></h2>
+        <!-- <h2><%= user.openTasks[i].color%></h2> -->
+      </form>
+    <% } %>
   </div>
-<% } %>
-
+</div>
 
 <div id='container'>
 

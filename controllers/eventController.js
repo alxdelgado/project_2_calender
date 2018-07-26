@@ -78,7 +78,7 @@ const getDateTime = () => {
 	if(newMonth < 10) {
 		newMonth = `0${newMonth}`
 	}
-	if(hour < 10) {
+	if(hour < 10 && hour != 0) {
 		hour = `0${hour}`;
 	}
 	if(newHour < 10 && newHour != 0) {

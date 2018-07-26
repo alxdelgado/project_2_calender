@@ -13,6 +13,9 @@
 
 	<main>
 		<h1><%=event.name%></h1><br>
+		<form action='/events/<%=event.id%>/edit'>
+			<button>Edit Event</button>
+		</form>
 		<form action='/events/<%=event.id%>?_method=DELETE' method='POST'>
 			<button>Delete Event</button>
 		</form>

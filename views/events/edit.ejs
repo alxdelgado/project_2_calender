@@ -3,6 +3,8 @@
 <head>
 	<title>Edit <%=event.name%></title>
 	<script type="text/javascript" src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js></script>
+	<link href="https://fonts.googleapis.com/css?family=Baloo+Chettan" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/css/new.css">
 	<style>
 		#personDiv {
 			position: relative;
@@ -10,6 +12,9 @@
 		#addPerson {
 			position: absolute;
 			bottom: 0;
+		}
+		body{
+			height: auto;
 		}
 	</style>
 </head>
@@ -52,7 +57,7 @@
 			<input type="text" name="location" value="<%=event.location%>"><br><br>
 			People:<br>
 			<div id='personDiv'>
-				<input type="text" name="person[]" value="<%=event.people[0]%>"> <button id='addPerson'>Add Another Person</button><br>
+				<input type="text" name="person[]" value="<%=event.people[0]%>"> <button id='addPerson'>+</button><br>
 				<% for (let i = 1; i < event.people.length; i++) { -%>
 					<input type="text" name="person[]" value="<%=event.people[i]%>"><br>
 				<% } -%>

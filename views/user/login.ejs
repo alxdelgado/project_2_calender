@@ -30,7 +30,8 @@
 
     <div class="register">
       <h1>Register</h1>
-      <form method="POST" action="/auth/register">
+      <form method="POST" action="/auth/register" id='register'>
+        <input type="hidden" name="timezone" id='timezone'>
         <input type="text" placeholder="Username" name="username" required><br/>
         <input type="password" placeholder="Password" name="password" id='pass' required><br/>
         <input type="password" placeholder="Confirm Password" name="checkPassword" id='checkpass' required></input><br/>

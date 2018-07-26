@@ -12,7 +12,8 @@ const userSchema = new mongoose.Schema({
 	created: {type: Date, default: now},
 	openTasks: [Task.schema],
 	closedTasks: [Task.schema],
-	calendars: [Calendar.schema]
+	calendars: [Calendar.schema],
+	timezone: Number 
 
 });
 

@@ -24,3 +24,18 @@ $('input').on('keyup', (event) => {
 
 })
 
+// when new user button is clicked
+// preventDefault
+// get date.now
+// get timezone from date.now
+// update value of tz field
+// event.target.parentNode.submit()
+
+
+$('#newUserButton').on('click', (event) => {
+	event.preventDefault();
+	const today = new Date();
+	const timezoneOffset = today.getTimezoneOffset();
+	$('#timezone').val(timezoneOffset);
+	$('#register').submit();
+})

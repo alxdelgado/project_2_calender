@@ -178,16 +178,20 @@ router.post('/', async (req, res) => {
 			}
 			
 		}
-		 
+		//find calendar the event was added to
+		const foundCalendar = await Calendar.findById(req.body.calendarId);
+		//save the calendar color to the created event
+		req.body.calendarColor = foundCalendar.color;
+		//create a new event in the EVENT Model
 		const createdEvent = await Event.create(req.body);
-		//find the calendar we are adding our new event to. // 
-		const foundCalendar = await Calendar.findById(req.body.calendarId)
+		//push the new event into the found calendar's event array
 		foundCalendar.events.push(createdEvent) 
 		foundCalendar.save();
 
 		//need to find which calendar the user is using
 		const foundUser = await User.findById(req.session.userId);
 
+		//find the calendar in the user calendar's array and push the event into the calendar
 		for(let i = 0; i < foundUser.calendars.length; i++) {
 			if(foundUser.calendars[i].id === req.body.calendarId)
 				foundUser.calendars[i].events.push(createdEvent);

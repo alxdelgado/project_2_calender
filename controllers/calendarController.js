@@ -74,7 +74,7 @@ router.post('/', async (req, res) => {
 		const newCalendar = await Calendar.create(req.body);
 		//push new calendar entry to current user
 		foundUser.calendars.push(newCalendar)
-		foundUser.save();
+		let saveEvent = await foundUser.save();
 		
 		res.redirect('/user')
 	} catch (err) {
@@ -102,11 +102,19 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
 	//check if calendar color has been used by User before.
 	try {
+		//find the user
 		const foundUser = await User.findById(req.session.userId);
+
+		//find the calendar being updated
 		const foundCalendar = await Calendar.findById(req.params.id);
+
+		//loop over all the calendars in the user
 		for (let i = 0; i < foundUser.calendars.length; i++) {
+			//check if calendar color is as another calendar's color
 			if(req.body.color === foundUser.calendars[i].color) {
+				//check if the match is the same calendar
 				if(req.params.id !== foundUser.calendars[i].id){
+					//if its not the same calendar, user cannot chosoe that color
 					res.render('calendars/edit.ejs', {
 						calendar: foundCalendar,
 						uniqueColor: true
@@ -115,17 +123,34 @@ router.put('/:id', async (req, res) => {
 			}
 		}
 
+
+		//if the new color doesn't match the older color
+		//find all the events in the calendar and update their color
+		if(req.body.color !== foundCalendar.color) {
+			for(let i = 0; i < foundCalendar.events.length; i++) {
+				const foundEvent = await Event.findById(foundCalendar.events[i].id);
+				foundEvent.calendarColor = req.body.color;
+				const saveEvent = await foundEvent.save;
+			}
+		}
+
+		//loop over the calendars in the user model and update the calendar
 		for(let i = 0; i < foundUser.calendars.length; i++) {
 			if(foundUser.calendars[i].id === req.params.id) {
 				foundUser.calendars[i].name = req.body.name;
 				foundUser.calendars[i].color = req.body.color;
 			}
 		}
-		foundUser.save();
-
+		let saveEvent = await foundUser.save();
+		//update the calendar
 		foundCalendar.name = req.body.name;
 		foundCalendar.color = req.body.color;
-		foundCalendar.save();
+		saveEvent = await foundCalendar.save();
+
+
+
+
+
 		res.redirect('/user');
 
 	} catch (err) {

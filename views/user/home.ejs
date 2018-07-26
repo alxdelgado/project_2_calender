@@ -46,6 +46,7 @@
 		margin: 0 auto;
 		padding: 0 0 0 5%;
 	}
+
 </style>
 <body>
   <header>
@@ -95,7 +96,8 @@
 			<% for (let j = 0; j < events.length; j++) { -%>
 				<% if(events[j].startDate.slice(8, 10) == i) {%>
 					<a href="/events/<%=events[j].id%>">
-						<div class='event'><%=events[j].name%></div><br>
+						<
+						<div style='background-color: <%=events[j].calendarColor%>' class='event '><%=events[j].name%></div><br>
 					</a>
 				<% } %>
 			<% } -%>

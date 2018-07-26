@@ -39,7 +39,8 @@ const eventSchema = new mongoose.Schema({
 	allDay: {type: Boolean, default: false},
 	people: [{type: String}],
 	location: String, 
-	calendarId: String
+	calendarId: String,
+	calendarColor: String
 });
 
 

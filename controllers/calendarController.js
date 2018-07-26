@@ -127,10 +127,11 @@ router.put('/:id', async (req, res) => {
 		//if the new color doesn't match the older color
 		//find all the events in the calendar and update their color
 		if(req.body.color !== foundCalendar.color) {
+			console.log('color is different')
 			for(let i = 0; i < foundCalendar.events.length; i++) {
 				const foundEvent = await Event.findById(foundCalendar.events[i].id);
 				foundEvent.calendarColor = req.body.color;
-				const saveEvent = await foundEvent.save;
+				const saveEvent = await foundEvent.save();
 			}
 		}
 

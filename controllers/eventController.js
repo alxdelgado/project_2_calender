@@ -186,7 +186,7 @@ router.post('/', async (req, res) => {
 		const createdEvent = await Event.create(req.body);
 		//push the new event into the found calendar's event array
 		foundCalendar.events.push(createdEvent) 
-		foundCalendar.save();
+		let saveEvent = await foundCalendar.save();
 
 		//need to find which calendar the user is using
 		const foundUser = await User.findById(req.session.userId);
@@ -196,7 +196,7 @@ router.post('/', async (req, res) => {
 			if(foundUser.calendars[i].id === req.body.calendarId)
 				foundUser.calendars[i].events.push(createdEvent);
 		}
-		foundUser.save();
+		let saveEvent2 = await foundUser.save();
 		res.redirect('/user'); 
 
 	} catch (err) {
@@ -258,6 +258,8 @@ router.put('/:id', async (req, res) => {
 			//find the user
 			const foundUser = await User.findById(req.session.userId);
 
+			let saveEvent;
+
 			//search over the calendar event's array to find and update the event
 			for(let i = 0; i < foundCalendar.events.length; i++) {
 				if(foundCalendar.events[i].id === updatedEvent.id) {
@@ -274,7 +276,7 @@ router.put('/:id', async (req, res) => {
 					}
 				}
 			}	//save the user
-			foundUser.save();
+			saveEvent = await foundUser.save();
 		} else {
 			//to be done if the calendar was changed by the user
 			//find the old calendar using old calendarID
@@ -294,10 +296,10 @@ router.put('/:id', async (req, res) => {
 				}
 			}
 
-			oldCalendar.save()
+			saveEvent = await oldCalendar.save()
 			//add the event to the new calendar
 			newCalendar.events.push(updatedEvent);
-			newCalendar.save()
+			saveEvent = await newCalendar.save()
 
 
 			//find the old calendar in the user model
@@ -314,7 +316,9 @@ router.put('/:id', async (req, res) => {
 					} else if(foundUser.calendars[i].id === newCalendar.id) {
 						foundUser.calendars[i].events.push(updatedEvent);
 					}
-				}	
+			}
+
+			saveEvent = await foundUser.save();	
 		}
 
 		res.redirect('/user');
@@ -330,21 +334,20 @@ router.delete('/:id', async (req, res) => {
 	try {
 		const foundEvent = await Event.findById(req.params.id);
 		//find the event in the calendar and user collections
-		const foundCalendar = await Calendar.find({'events.id': req.params.id});
-		const foundUser = await User.find({'Calendars.id': foundCalendar.id});
-		const calendarName = foundCalendar.name;
+		const foundCalendar = await Calendar.findById(foundEvent.calendarId);
+		const foundUser = await User.findById(req.session.userId);
 
 		//find the event in the User model and remove
 		foundUser.calendars.id(foundCalendar.id).events.id(foundEvent.id).remove();
 		//find the event in the Calendar model and remove
 		foundCalendar.events.id(foundEvent.id).remove();
 		//save the User and Calendar models
-		foundUser.save();
-		foundCalendar.save()
+		let saveEvent = await foundUser.save();
+		saveEvent = await foundCalendar.save()
 		//find the event in the Event model and remove
 		const deletedEvent = await Event.findByIdAndRemove(req.params.id);
 		//redirect to the User's home page
-		res.redirect('/users/' + req.params.id);
+		res.redirect('/users/' + req.session.userId);
 
 	} catch (err) {
 		console.log(err, 'error with event delete route')

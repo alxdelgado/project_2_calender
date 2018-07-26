@@ -13,6 +13,9 @@
 
 	<main>
 		<h1><%=event.name%></h1><br>
+		<form action='/events/<%=event.id%>?_method=DELETE' method='POST'>
+			<button>Delete Event</button>
+		</form>
 
 		<% if (event.allDay === true) { %>
 			<h4><%=event.startDate%></h4>	

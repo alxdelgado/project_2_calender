@@ -81,7 +81,7 @@ const getDateTime = () => {
 	if(hour < 10) {
 		hour = `0${hour}`;
 	}
-	if(newHour < 10) {
+	if(newHour < 10 && newHour != 0) {
 		newHour = `0${newHour}`
 	}
 	//make a string in the format required for HTML Forms and the schema

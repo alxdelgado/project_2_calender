@@ -61,7 +61,7 @@ router.post('/', async (req, res) => {
 		const foundUser = await User.findById(req.session.userId);
 		for (let i = 0; i < foundUser.calendars.length; i++) {
 			if(req.body.color === foundUser.calendars[i].color) {
-				res.render('calendar/new.ejs', {
+				res.render('calendars/new.ejs', {
 					uniqueColor: true
 				});
 			}

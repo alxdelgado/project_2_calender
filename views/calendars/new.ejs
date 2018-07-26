@@ -21,6 +21,10 @@
 			<input type="color" name="color" value='#0000FF'>
 			<br><br><hr>
 			<button>Submit</button>
+			
+			<%if(uniqueColor === true) {%>
+			<small>Color already in use. Please choose another color.</small>
+			<% } %>
 
 		</form>
 		<form action='/user'>

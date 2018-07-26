@@ -45,21 +45,32 @@ const getDateTime = () => {
 		minute = '00';
 	}
 	
-	
+	//get the current day
 	const day = today.getUTCDate();
+	//get the current month
 	let month = today.getUTCMonth() + 1;
+	//get the current year
 	const year = today.getUTCFullYear();
+	//get the current hour
 	let hour = today.getUTCHours() + 1;
+	//change the hour to 0 if 24
 	if(hour == 24) {
-		hour = 0;
+		hour = '00';
 	}	
+	//get the UTC milliseconds
 	const nowMilliseconds = today.getTime();
+	//add 1 hour to the UTC milliseconds
 	const futureMilliseconds = nowMilliseconds + 1800000 + 1800000;
+	//set the time to 1 hour from now
 	today.setTime(futureMilliseconds);
 
+	//get the new day
 	const newDay = today.getUTCDate();
+	//get the new month
 	let newMonth = today.getUTCMonth() + 1;
+	//get the new year
 	const newYear = today.getUTCFullYear();
+	//get the new year
 	let newHour = today.getUTCHours() + 1;
 	if(newHour == 24) {
 		newHour = '00';
@@ -77,6 +88,7 @@ const getDateTime = () => {
 	if(newHour < 10) {
 		newHour = `0${newHour}`
 	}
+	//make a string in the format required for HTML Forms and the schema
 	const currentDateString = `${year}-${month}-${day}`;
 	const currentTimeString = `${hour}:${minute}`;
 	const futureDateString = `${newYear}-${newMonth}-${newDay}`
@@ -89,8 +101,57 @@ router.get('/new', async (req, res) => {
 	const foundUser = await User.findById(req.session.userId);
 	// console.log(foundUser)
 	const timeArray = getDateTime();
+	console.log(timeArray)
 
 	if(foundUser.calendars.length > 0){
+		// console.log('error with the event/new route')
+		res.render('events/new.ejs', {
+			timeArray: timeArray,
+			user: foundUser
+		});
+	
+	} else {
+		// console.log('whats going on?')
+		res.redirect('/calendar/new')
+	}
+	
+});
+
+//NEW EVENT ROUTE
+//used when clicking on the calendar to get the date for which the user clicked
+router.get('/new/:year/:month/:day', async (req, res) => {
+	const foundUser = await User.findById(req.session.userId);
+
+	const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+	let monthNumber;
+	//find the number associated with the month
+	for(let i = 0; i < monthNames.length; i++) {
+		if(monthNames[i] == req.params.month) {
+			monthNumber = i + 1;
+		}
+	}
+	//if the month is <10, add a 0 before for the HTML form format
+	if(monthNumber < 10) {
+		monthNumber = `0${monthNumber}`;
+	}
+		
+	//find the day as a number
+	let dayNumber = parseInt(req.params.day);
+	//if the day is <10, add a 0 before for the HTML form format
+	if(req.params.day < 10) {
+		dayNumber = `0${dayNumber}`;
+	}	
+
+	//make a string in the correct format for the HTML form
+	const dateString = `${req.params.year}-${monthNumber}-${dayNumber}`
+	const timeArray = [dateString, '08:00', dateString, '09:00'];
+
+
+	//check if user has calendars. If not then redirect them to make a calendar
+	if(foundUser.calendars.length > 0){
+
+
 		// console.log('error with the event/new route')
 		res.render('events/new.ejs', {
 			timeArray: timeArray,
@@ -152,10 +213,14 @@ router.post('/', async (req, res) => {
 //EDIT EVENT ROUTE
 router.get('/:id/edit', async (req, res) => {
 	try {
+		//find event in Event model using id
 		const foundEvent = await Event.findById(req.params.id);
+		//find the calendar using the calendar id in the event
 		const foundCalendar = await Calendar.findById(foundEvent.calendarId);
+		//find the user
 		const foundUser = await User.findById(req.session.userId);
 
+		//render the edit page
 		res.render('events/edit.ejs', {
 			event: foundEvent,
 			calendar: foundCalendar,

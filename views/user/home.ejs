@@ -89,7 +89,7 @@
 <% } %>
 
 <% for (let i = 1; i <= monthDays; i++) { %>
-	<a href="/events/new">
+	<a href="/events/new/<%=year%>/<%=monthName%>/<%=i%>">
 		<div class='calendarDiv'>
 			<small><%=i%></small><br>
 			<% for (let j = 0; j < events.length; j++) { -%>

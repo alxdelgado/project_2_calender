@@ -20,15 +20,11 @@
 </head>
 <body>
 
-	<header>
-		<nav>
-				<a href="/user">Cancel</a>
-		</nav>
-	</header>
-
 	<main>
 		<h2>Edit <%=event.name%></h2>
 		<form method='POST' action='/events/<%=event.id%>?_method=PUT'>
+			<hr>
+			<small>Choose Calendar: </small><br>
 			<select name='calendarId'>
 				<% for(let i = 0; i < user.calendars.length; i++) { %>
 					<option name='calendarId' value="<%= user.calendars[i].id%>"
@@ -37,25 +33,25 @@
 						<%}%>
 						><%= user.calendars[i].name %></option>
 				<% } %>	
-			</select><br><br>
-			Appointment Name:<br>
-			<input type="text" name="name" value="<%=event.name%>" autofocus required><br><br>
-			Start Date:<br>
+			</select><a href="/calendar/new"><button id='addCalendar' type='button'>+</button></a><br><br>
+			<small>Appointment Name:</small><br>
+			<input type="text" name="name" value="<%=event.name%>" autofocus required><br><hr>
+			<small>Start Date:</small><br>
 			<input type="date" name="startDate" value="<%=event.startDate%>"><br>
-			Start Time: <br>
-			<input type="time" name="startTime" value='<%=event.startTime%>'><br><br>
-			All Day <input type="checkbox" name="allDay" id='allDay' 
+			<small>Start Time:</small> <br>
+			<input type="time" name="startTime" value='<%=event.startTime%>'><br><hr>
+			<small>All Day </small><input type="checkbox" name="allDay" id='allDay' 
 				<%if(event.allDay === true) {%>
 					checked
 				<% } %>
-				><br><br>	
-			<h3 class='end'>End Date:</h3>
+				><br><hr>
+			<small class='end'>End Date:</small><br>
 			<input type="date" name="endDate" value='<%=event.endDate%>' class='end'><br>
-			<h3 class="end">End Time: </h3>
-			<input type="time" name="endTime" value='<%=event.endTime%>' class='end'><br><br>
-			Location:<br>
-			<input type="text" name="location" value="<%=event.location%>"><br><br>
-			People:<br>
+			<small class="end">End Time: </small><br>
+			<input type="time" name="endTime" value='<%=event.endTime%>' class='end'><br><hr>
+			<small>Location:</small><br>
+			<input type="text" name="location" value="<%=event.location%>"><br><hr>
+			<small>People:</small><br>
 			<div id='personDiv'>
 				<input type="text" name="person[]" value="<%=event.people[0]%>"> <button id='addPerson'>+</button><br>
 				<% for (let i = 1; i < event.people.length; i++) { -%>
@@ -63,7 +59,10 @@
 				<% } -%>
 			</div><br>
 			
-			<button>Save</button>
+			<button>Submit</button>
+		</form>
+		<form action='/user'>
+			<button>Cancel</button>
 		</form>
 	
 

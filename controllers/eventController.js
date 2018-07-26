@@ -18,10 +18,6 @@ router.use((req, res, next) => {
 // making middleware to redirect to login page unless user is logged in
 router.use((req, res, next) => {
 
-	//ONLY USED FOR TESTING
-	req.session.logged = true;
-
-
 	// console.log(req.session.cookie.path)
 	if(!req.session.logged) {
 		res.redirect('/user/login') //adjust home page to whatever the main loading page is
@@ -101,7 +97,6 @@ router.get('/new', async (req, res) => {
 	const foundUser = await User.findById(req.session.userId);
 	// console.log(foundUser)
 	const timeArray = getDateTime();
-	console.log(timeArray)
 
 	if(foundUser.calendars.length > 0){
 		// console.log('error with the event/new route')
@@ -150,16 +145,12 @@ router.get('/new/:year/:month/:day', async (req, res) => {
 
 	//check if user has calendars. If not then redirect them to make a calendar
 	if(foundUser.calendars.length > 0){
-
-
-		// console.log('error with the event/new route')
 		res.render('events/new.ejs', {
 			timeArray: timeArray,
 			user: foundUser
 		});
 	
 	} else {
-		// console.log('whats going on?')
 		res.redirect('/calendar/new')
 	}
 	
@@ -320,9 +311,6 @@ router.put('/:id', async (req, res) => {
 						foundUser.calendars[i].events.push(updatedEvent);
 					}
 				}	
-
-
-
 		}
 
 		res.redirect('/user');
@@ -343,8 +331,8 @@ router.delete('/:id', async (req, res) => {
 		const calendarName = foundCalendar.name;
 
 		//find the event in the User model and remove
-		foundUser.Calendars.id(foundCalendar.id).events.id(foundEvent.id).remove();
-		//find the event in the Calendar mondel and remove
+		foundUser.calendars.id(foundCalendar.id).events.id(foundEvent.id).remove();
+		//find the event in the Calendar model and remove
 		foundCalendar.events.id(foundEvent.id).remove();
 		//save the User and Calendar models
 		foundUser.save();

@@ -4,11 +4,19 @@
 	<title><%=user.name%>'s Calendars</title>	
 	<link href="https://fonts.googleapis.com/css?family=Baloo+Chettan" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/css/new.css">
+	<% if(user.calendars.length > 2 ) {%>
+	<style>
+		body {
+			height: auto;
+		}
+		</style>
+	<% } %>
 </head>
 <body>
 
 
 	<main>
+		<a href="/calendar/new">New Calendar</a>
 		<hr>
 		<% for (let i = 0; i < user.calendars.length; i++) { -%>
 
@@ -18,7 +26,10 @@
 			<input type="text" name="name" value="<%=user.calendars[i].name%>"><br>
 			<h4>Calendar Color: </h4>
 			<input type="color" name="color" value='<%=user.calendars[i].color%>'><br><br>
-			<button>Save Changes</button>
+			<button>Save Changes</button> 
+			</form>
+			<form method='POST' action='/calendar/<%=user.calendars[i].id%>?_method=DELETE'>
+				<button>Delete Calendar</button>
 			</form>
 
 		</div>

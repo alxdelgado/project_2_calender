@@ -138,19 +138,27 @@ router.put('/:id', async (req, res) => {
 //DELETE CALENDAR ROUTE
 router.delete('/:id', async (req, res) => {
 	try {
-		const foundCalendar = Calendar.findById(req.params.id);
+		const foundCalendar = await Calendar.findById(req.params.id);
+		const calendarID = foundCalendar.id;
 		//loop through all the events in the calendar and delete them
 		for(let i = 0; i < foundCalendar.events.length; i++) {
-			const deletedEvent = await Event.findByIdAndRemove(foundCalendar.event[i].id);
+			const deletedEvent = await Event.findByIdAndRemove(foundCalendar.events[i].id);
 		}
 
 		//find user and delete calendar from calendars array
-		const foundUser = User.findById(req.session.id);
-		for(let i = 0; i < foundUser.calendars.length; i++) {
-			if(foundUser.calendars[i].id === foundCalendar.id) {
-				foundUser.calendars.splice(i, 1);
-			}
-		}
+		const foundUser = await User.findById(req.session.userId);
+		// console.log(foundUser, 'this is before calendar removal')
+
+		// for(let i = 0; i < foundUser.calendars.length; i++) {
+		// 	if(foundUser.calendars[i].id === foundCalendar.id) {
+		// 		const deletedCalendar = foundUser.calendars.splice(i, 1);
+		// 	}
+		// }
+		foundUser.calendars.id(foundCalendar.id).remove()
+		await foundUser.save();
+
+		// console.log(foundUser, 'this is after calendar removal')
+		// await foundCalendar.save();
 
 		//delete the calendar from Calendar model
 		const deletedCalendar = await Calendar.findByIdAndRemove(req.params.id);

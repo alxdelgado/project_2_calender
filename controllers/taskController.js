@@ -5,6 +5,18 @@ const User = require('../models/user');
 const Task = require('../models/task');
 
 
+// making middleware to redirect to login page unless user is logged in
+router.use((req, res, next) => {
+
+  // console.log(req.session.cookie.path)
+  if(!req.session.logged) {
+    res.redirect('/user/login') //adjust home page to whatever the main loading page is
+  } else {
+    next();
+  }
+})
+
+
 // NEW ROUTE // 
 router.get('/new', async (req, res) => {
   try { 

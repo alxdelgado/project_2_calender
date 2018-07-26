@@ -42,6 +42,15 @@ router.get('/', async (req, res) => {
 });
 /////////////////////////
 
+//middle ware to redirect user to login page if they are not logged in
+router.use((req, res, next) => {
+  if(req.session.logged !== true ) {
+    res.redirect('/user')
+  } else {
+    next(); 
+  }
+});
+
 
 /////////////////////////
 // PREFERENCES ROUTE // 

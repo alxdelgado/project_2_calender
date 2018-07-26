@@ -77,12 +77,14 @@
  		<a href="/user/<%=user.id%>/<%=nextMonthYear%>/<%=nextMonthName%>">&#10095;&#10095;</a></h3>
 </div>
 
-<% for (let i = 0; i < user.openTasks.length; i++) { %>
   <div id="taskList">
-    <h2><%= user.openTasks[i].name%></h2>
-    <h2><%= user.openTasks[i].color%></h2>
+    <% for (let i = 0; i < user.openTasks.length; i++) { %>
+      <form method="POST" action="/task/<%= user.openTasks[i].id%>?_method=DELETE">
+        <h2><a href="#" onclick="event.target.parentNode.parentNode.submit()"><%= user.openTasks[i].name %></a></h2>
+        <!-- <h2><%= user.openTasks[i].color%></h2> -->
+      </form>
+    <% } %>
   </div>
-<% } %>
 </div>
 
 <div id='container'>

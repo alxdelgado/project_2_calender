@@ -59,12 +59,22 @@ router.post('/', async (req, res) => {
 
 
 // DELETE ROUTE //
-router.delete('/', async (req, res) => {
+router.delete('/:id', async (req, res) => {
+
   try {
-    const deletedTask = await User.findByIdAndRemove(req.params.id);
-    res.render('task/archive.ejs', {
-      user: deletedTask
-    })
+    const foundUser = await User.findById(req.session.userId);
+    const foundTask = await Task.findById(req.params.id);
+    for(let i = 0; i < foundUser.openTasks.length; i++){
+      if(foundUser.openTasks[i].id === foundTask.id){
+        const removedTask = foundUser.openTasks.splice(i, 1); 
+      }
+
+    } 
+   
+    const deleteTask = await Task.findByIdAndRemove(req.params.id);
+    await foundUser.save(); 
+    res.redirect('/user')
+  
   } catch(err) {
     res.send(err)
   }
@@ -72,3 +82,28 @@ router.delete('/', async (req, res) => {
 
 // EXPORT ROUTER //
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

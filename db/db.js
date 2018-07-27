@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/calendar_GA_PROJECT');
+const monogoUri = process.env.MONGODB_URI  || 'mongodb://localhost/calendar_GA_PROJECT';
+
+mongoose.connect(mongoUri);
 
 
 mongoose.connection.on('connected', () => {

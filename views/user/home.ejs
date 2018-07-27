@@ -7,19 +7,41 @@
 
 	body{
 		background-image: linear-gradient(to right bottom, #343537, #555658, #78797c, #9c9fa1, #c3c6c8);
+    <%if(user.openTasks.length > 3) {%>
+      height: auto;
+      <% } else { %>
+        height: 100vh;
+        <% } %>
 	}
-  .flex-container {
+  
+  #taskFlex {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
+  }
+  
+  .flex-container {
+    text-align: center;
+    position: static;
 
   }
-  #tasklist {
-    display: right;
+
+  .month {
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    align-self: center;
+  }
+
+  #taskList {
+    padding: 20px 50px;
+  }
+
+
+  #taskList < form < h2 {
+    display: inline-block;
     border: 1px rgba(229, 71, 60, 0.5);
     width: 20%;
     margin: 0;
-    padding: 0px, 50px, 0px, 50px;
 }
 	.calendarDiv {
 		display: inline-block;
@@ -27,11 +49,18 @@
 		margin: 0;
 		padding: 0px 0 70px 0;
 		border: 1px solid gray;
-		background-color: lightblue;
+		background-color: black;
+    opacity: 0.5;
+    max-height: 90.87px;
+    overflow: hidden;
 
 	}
+
+  .calendarDiv:hover {
+    background-color: rgb(138, 255, 61, 0.87);
+  }
 	a {
-		text-decoration: none
+    color: red;
 	}
 	.event {
 		display: inline-block;
@@ -47,6 +76,11 @@
 		text-align: center;
 		background-color: lightgray;
 	}
+
+  .logoutTab {
+    text-align: right;
+  }
+
 	h4{
 		margin: 5px 0 0 5%;
 	}
@@ -70,8 +104,12 @@
       <a href="/task/new">New Task</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
       <!-- <a href="/task/archive">Archived Task</a></li>&nbsp;&nbsp;&nbsp;&nbsp; -->
       <!-- <a href="/user/<%=user.id%>/preferences">Edit Preferences</a></li>&nbsp;&nbsp;&nbsp;&nbsp; -->
-      <a href="/auth/logout">Logout</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
       <a href="/user">Today's Date</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+      
+      <div class='logoutTab'> 
+      <a href="/auth/logout">Logout</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+
   </header>
 
 <div class="flex-container"> 
@@ -81,8 +119,11 @@
     	<a href="/user/<%=user.id%>/<%=nextYear%>/<%=monthName%>">&#10095;&#10095;</a></h2>
  	<h3><a href="/user/<%=user.id%>/<%=prevMonthYear%>/<%=prevMonthName%>">&#10094;&#10094;</a>&nbsp;&nbsp;&nbsp;<%=monthName%>&nbsp;&nbsp;&nbsp;
  		<a href="/user/<%=user.id%>/<%=nextMonthYear%>/<%=nextMonthName%>">&#10095;&#10095;</a></h3>
-</div>
+  </div>
 
+  
+</div>
+<div id='taskFlex'>
   <div id="taskList">
     <% for (let i = 0; i < user.openTasks.length; i++) { %>
       <form method="POST" action="/task/<%= user.openTasks[i].id%>?_method=DELETE">

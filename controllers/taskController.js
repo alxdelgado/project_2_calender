@@ -94,28 +94,3 @@ router.delete('/:id', async (req, res) => {
 
 // EXPORT ROUTER //
 module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -24,8 +24,8 @@
 		<% } else {%>
 			<h3><%=startDateString%> at <%=startTimeString%></h3>
 			<h3>to</h3>
-			<h3><%=endDateString%> at <%=endTimeString%></h3>
-		<% } %><hr>
+			<h3><%=endDateString%> at <%=endTimeString%></h3> <hr>
+		<% } %>
 
 		<%if(event.location == 'undefined' || event.location == '' || event.location == ' ') {%>
 		<%} else {%>
@@ -41,8 +41,10 @@
 		
 		<% for(let i = 0; i < event.people.length; i++) { %>
 			<h4 class='lessMargin'><%=event.people[i]%></h4>
-		<% } %><hr>
-		
+		<% } %>
+		<%if(event.people.length > 0) {%>
+		<hr>
+		<%}%>
 
 
 		<form action='/events/<%=event.id%>/edit'>

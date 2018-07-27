@@ -2,43 +2,55 @@
 <html>
 <head>
 	<title><%=event.name%></title>
+	<link href="https://fonts.googleapis.com/css?family=Baloo+Chettan" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/css/new.css">
+	<style>
+		.lessMargin {
+			margin: 0px 0 0 0;
+		}
+	</style>
 </head>
 <body>
-
-	<header>
-		<nav>
-				<a href="/user">Back to Calendar</a>
-		</nav>
-	</header>
+	<form action='/user'>
+		<button>Return to Calendar</button>
+	</form>
+	
 
 	<main>
-		<h1><%=event.name%></h1><br>
+		<h1><%=event.name%></h1><hr>
+
+		<% if(endDateString === '') { %>
+			<h3><%=startDateString%> at <%=startTimeString%></h3>
+		<% } else {%>
+			<h3><%=startDateString%> at <%=startTimeString%></h3>
+			<h3>to</h3>
+			<h3><%=endDateString%> at <%=endTimeString%></h3>
+		<% } %><hr>
+
+		<%if(event.location == 'undefined' || event.location == '' || event.location == ' ') {%>
+		<%} else {%>
+			<h3 class='lessMargin'>Location:</h3>
+			<h4 class='lessMargin'><%=event.location%></h4>
+		<% } %>	
+
+
+		<hr>
+		<%if(event.people.length > 0) { %>
+			<h3 class='lessMargin'>People:</h3>
+		<% } %>
+		
+		<% for(let i = 0; i < event.people.length; i++) { %>
+			<h4 class='lessMargin'><%=event.people[i]%></h4>
+		<% } %><hr>
+		
+
+
 		<form action='/events/<%=event.id%>/edit'>
 			<button>Edit Event</button>
 		</form>
 		<form action='/events/<%=event.id%>?_method=DELETE' method='POST'>
 			<button>Delete Event</button>
 		</form>
-
-		<% if (event.allDay === true) { %>
-			<h4><%=event.startDate%></h4>	
-		<% } else { %>
-			<h4><%=event.startDate%> - <%=event.endDate%></h4>
-		<% } %>
-
-		<small><%=event.startTime%> - <%=event.endTime%></small><br>
-		<h3>Location</h3>
-		<%=event.location%>
-
-
-		<br><br><br>
-
-		<h3>People</h3>
-		<ul>
-		<% for(let i = 0; i < event.people.length; i++) { %>
-			<li><%=event.people[i]%></li>
-		<% } %>
-		</ul>
 
 
 

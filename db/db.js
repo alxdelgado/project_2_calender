@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/calendar_GA_PROJECT');
+// Heroku // 
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/calendar_GA_PROJECT';
+
+mongoose.connect(mongoUri);
 
 
 mongoose.connection.on('connected', () => {
@@ -14,3 +17,4 @@ mongoose.connection.on('error', (err) => {
 mongoose.connection.on('disconnected', () => {
 	console.log('mongoose was disconnected from mongoDB');
 });
+

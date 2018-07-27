@@ -78,10 +78,10 @@ const getDateTime = () => {
 	if(newMonth < 10) {
 		newMonth = `0${newMonth}`
 	}
-	if(hour < 10) {
+	if(hour < 10 && hour != 0) {
 		hour = `0${hour}`;
 	}
-	if(newHour < 10) {
+	if(newHour < 10 && newHour != 0) {
 		newHour = `0${newHour}`
 	}
 	//make a string in the format required for HTML Forms and the schema
@@ -360,12 +360,81 @@ router.get('/:id', async (req, res) => {
 
 	try {
 
+		const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 		const foundEvent = await Event.findById(req.params.id);
 		const foundCalendar = await Calendar.findById(foundEvent.calendarId);
 
+		//find the month string and convert a number
+		const startMonthNumber = parseInt(foundEvent.startDate.slice(5, 7));
+		const startMonthName = monthNames[startMonthNumber - 1];
+			
+		//find the start year and date	
+		const startYear = foundEvent.startDate.slice(0, 4);
+		const startDate = foundEvent.startDate.slice(8, 10);
+
+		//find the start hour and minutes
+		let startHour = parseInt(foundEvent.startTime.slice(0, 2));
+		const startMin = foundEvent.startTime.slice(3, 5);
+
+		//set the default to AM
+		let startMorning = 'a.m.';
+
+		//if time is > 12, subtract 12 and make it PM
+		if(startHour > 12) {
+			startHour = startHour - 12;
+			startMorning = 'p.m.';
+		}
+
+		const startDateString = `${startMonthName} ${startDate}, ${startYear}`;
+		const startTimeString = `${startHour}:${startMin} ${startMorning}`;
+
+
+		let endDateString = '';
+		let endTimeString = '';
+
+		console.log(foundCalendar)
+
+		if(foundCalendar.allDay != true) {
+
+			//find the month string and convert a number
+			const endMonthNumber = parseInt(foundEvent.endDate.slice(5, 7));
+			const endMonthName = monthNames[endMonthNumber - 1];
+				
+			//find the start year and date	
+			const endYear = foundEvent.endDate.slice(0, 4);
+			const endDate = foundEvent.endDate.slice(8, 10);
+	
+			//find the start hour and minutes
+			const endHour = parseInt(foundEvent.endTime.slice(0, 2));
+			const endMin = foundEvent.endTime.slice(3, 5);
+	
+			//set the default to AM
+			let endMorning = 'a.m.';
+	
+			//if time is > 12, subtract 12 and make it PM
+			if(endHour > 12) {
+				endHour = endHour - 12;
+				endMorning = 'p.m.';
+			}
+
+			endDateString = `${endMonthName} ${startDate}, ${endYear}`;
+			endTimeString = `${endHour}:${endMin} ${endMorning}`;
+		}
+
+
+
+
+
+
+
 		res.render('events/show.ejs', {
 			event: foundEvent,
-			calendar: foundCalendar
+			calendar: foundCalendar, 
+			startDateString: startDateString, 
+			startTimeString: startTimeString,
+			endDateString: endDateString,
+			endTimeString: endTimeString
 		})
 	} catch (err) {
 		console.log(err, 'error with event show route')

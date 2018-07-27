@@ -37,7 +37,7 @@ router.post('/register', async (req, res) => {
 
 // Login // 
 router.post('/login', (req, res) => {
-  User.findOne ({username: req.body.username}, (err, user) => {
+  User.findOne({username: req.body.username}, (err, user) => {
     if(user){
       // If the user is found. 
       if(bcrypt.compareSync(req.body.password, user.password)){

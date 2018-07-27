@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const monogoUri = process.env.MONGODB_URI  || 'mongodb://localhost/calendar_GA_PROJECT';
 
+
 mongoose.connect(mongoUri);
 
 
@@ -16,3 +17,4 @@ mongoose.connection.on('error', (err) => {
 mongoose.connection.on('disconnected', () => {
 	console.log('mongoose was disconnected from mongoDB');
 });
+

@@ -36,7 +36,7 @@
   <div id="taskList">
     <% for (let i = 0; i < user.openTasks.length; i++) { %>
       <form method="POST" action="/task/<%= user.openTasks[i].id%>?_method=DELETE">
-        <h2><a href="#" onclick="event.target.parentNode.parentNode.submit()"><%= user.openTasks[i].name %></a></h2>
+        <h2 class='tasks'><a href="#" class='taskTag' onclick="event.target.parentNode.parentNode.submit()"><%= user.openTasks[i].name %></a></h2>
         <!-- <h2><%= user.openTasks[i].color%></h2> -->
       </form>
     <% } %>
@@ -61,7 +61,7 @@
 			<small><%=i%></small><br>
 			<% for (let j = 0; j < events.length; j++) { -%>
 				<% if(events[j].startDate.slice(8, 10) == i) {%>
-					<a href="/events/<%=events[j].id%>">
+					<a class='eventTag' href="/events/<%=events[j].id%>">
 						<div style='background-color: <%=events[j].calendarColor%>' class='event '><%=events[j].name%></div><br>
 					</a>
 				<% } %>

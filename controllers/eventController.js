@@ -393,7 +393,6 @@ router.get('/:id', async (req, res) => {
 		let endDateString = '';
 		let endTimeString = '';
 
-		console.log(foundCalendar)
 
 		if(foundCalendar.allDay != true) {
 
@@ -406,7 +405,7 @@ router.get('/:id', async (req, res) => {
 			const endDate = foundEvent.endDate.slice(8, 10);
 	
 			//find the start hour and minutes
-			const endHour = parseInt(foundEvent.endTime.slice(0, 2));
+			let endHour = parseInt(foundEvent.endTime.slice(0, 2));
 			const endMin = foundEvent.endTime.slice(3, 5);
 	
 			//set the default to AM

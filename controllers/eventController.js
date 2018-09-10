@@ -332,6 +332,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
 	try {
+		console.log('got to delete event route')
 		const foundEvent = await Event.findById(req.params.id);
 		//find the event in the calendar and user collections
 		const foundCalendar = await Calendar.findById(foundEvent.calendarId);
@@ -347,7 +348,7 @@ router.delete('/:id', async (req, res) => {
 		//find the event in the Event model and remove
 		const deletedEvent = await Event.findByIdAndRemove(req.params.id);
 		//redirect to the User's home page
-		res.redirect('/users/' + req.session.userId);
+		res.redirect('/user/' + req.session.userId);
 
 	} catch (err) {
 		console.log(err, 'error with event delete route')

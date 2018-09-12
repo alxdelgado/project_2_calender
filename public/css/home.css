@@ -1,12 +1,12 @@
 body{
 	background-image: linear-gradient(to right bottom, #343537, #555658, #78797c, #9c9fa1, #c3c6c8);
 	}
-  
+
 #taskFlex {
 	display: flex;
     justify-content: flex-end;
 }
-  
+
 .flex-container {
     text-align: center;
     position: static;
@@ -103,7 +103,3 @@ h3, h2, h1{
 	padding: 0 0 0 5%;
 
 }
-
-
-
-

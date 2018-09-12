@@ -4,11 +4,12 @@ div img {
 
 }
 body{
-	background-image: url("https://www.planwallpaper.com/static/images/6790904-free-background-wallpaper.jpg")
+	/* background-image: url("https://www.planwallpaper.com/static/images/6790904-free-background-wallpaper.jpg") */
+	background-color: rgba(0, 0, 0, 0.90);
 }
 .image {
 	text-align: center;
-	
+
 }
 h1, h4, small{
 	font-family: 'Baloo Chettan', cursive;
@@ -30,7 +31,7 @@ main {
 	padding: 0 0 20px 0;
 }
 
-input { 
+input {
 	margin: 4px;
 	width: 150px;
 	height: 20px;

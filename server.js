@@ -24,7 +24,7 @@ app.use(session({
 	secret: '9fajdf9urajdkfaskfjaijfasfjahsdflasfhauiuriwfkjafaf',
 	resave: false, //only save when the session object has been modified
 	saveUninitialized: false //user for login sessions, we only want to save when we modify the session
-})); 
+}));
 
 
 //MiddleWare
@@ -39,20 +39,16 @@ app.use(methodOverride('_method'));
 app.use('/events', eventController);
 app.use('/user', userController);
 app.use('/calendar', calendarController);
-app.use('/auth', authController); 
-app.use('/task', taskController); 
+app.use('/auth', authController);
+app.use('/task', taskController);
 
 
-// login // 
+// login //
 app.get('/', (req, res,) => {
-  res.redirect('/user')  
+  res.redirect('/user')
 });
 
 
 app.listen(port, () => {
 	console.log(`Server is listening on port: ${port}`);
 })
-
-
-
-

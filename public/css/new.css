@@ -13,7 +13,7 @@ h4{
 }
 main{
 	display: inline-block;
-	background-color: rgba(0, 0, 0, 0.35);
+	background-color: rgba(0, 0, 0, 0.70);
 	padding: 15px 50px 50px 50px;
 	margin: 10px;
 	box-shadow: 5px 5px 5px rgba(229, 71, 60, 0.3);
@@ -24,13 +24,14 @@ input {
 	width: 150px;
 	height: 20px;
 	border-radius: 5px;
+	cursor: pointer;
 	border: 3px solid rgba(229, 71, 60, 1);
 }
 
 #addPerson, #addCalendar {
 	font-size: 15px;
 	padding: 0 10px 22px 10px;
-} 
+}
 
 #addCalendar {
 	margin: 0 0 0 15px;
@@ -43,7 +44,7 @@ input {
 }
 
 body {
-	background-image: linear-gradient(to right bottom, #343537, #555658, #78797c, #9c9fa1, #c3c6c8);
+	background-color: rgba(0, 0, 0, 0.70);
 	text-align: center;
 	height: 100vh;
 }
@@ -63,8 +64,8 @@ button{
   text-align: center;
 }
 button:hover{
-  background:#fff;
-  color:#1AAB8A;
+	background:#fff;
+  color: rgba(229, 71, 60, 0.90);
 }
 button:before,button:after{
   content:'';
@@ -73,7 +74,8 @@ button:before,button:after{
   right:0;
   height:2px;
   width:0;
-  background: #1AAB8A;
+  background: rgba(0, 0, 0, 0.70);
+	cursor: pointer;
   transition:400ms ease all;
 }
 button:after{

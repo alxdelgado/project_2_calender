@@ -1,5 +1,5 @@
 body{
-	background-image: linear-gradient(to right bottom, #343537, #555658, #78797c, #9c9fa1, #c3c6c8);
+	background-color: rgba(0, 0, 0, 0.70);
 	}
 
 #taskFlex {
@@ -17,7 +17,7 @@ body{
 }
 
 a:hover {
-  	color: darkblue;
+  	color: rgb(138, 255, 61, 0.87);
 }
 
 .month {
@@ -62,6 +62,7 @@ a:hover {
 a {
     color: red;
     text-decoration: none;
+		font-family: 'Baloo Chettan', cursive;
 }
 
 .event {
@@ -83,18 +84,22 @@ a {
 
 .logoutTab {
     text-align: right;
+		font-family: 'Baloo Chettan', cursive;
 }
 
 h4{
 	margin: 5px 0 0 5%;
+	font-family: 'Baloo Chettan', cursive;
 }
 
 small {
 	margin: 2px 0 0 5%;
+	font-family: 'Baloo Chettan', cursive;
 }
 
 h3, h2, h1{
 	text-align: center;
+	font-family: 'Baloo Chettan', cursive;
 }
 
 

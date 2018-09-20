@@ -5,7 +5,7 @@ div img {
 }
 body{
 	/* background-image: url("https://www.planwallpaper.com/static/images/6790904-free-background-wallpaper.jpg") */
-	background-color: rgba(0, 0, 0, 0.90);
+	background-color: rgba(0, 0, 0, 0.70);
 }
 .image {
 	text-align: center;
@@ -25,7 +25,7 @@ small {
 main {
 	display: flex;
 	justify-content: space-around;
-	background-color: rgba(0, 0, 0, .5);
+	background-color: rgba(0, 0, 0, .70);
 	box-shadow: 5px 5px 5px rgba(229, 71, 60, 0.4);
 	margin: 0 15% 0 15%;
 	padding: 0 0 20px 0;
@@ -36,6 +36,7 @@ input {
 	width: 150px;
 	height: 20px;
 	border-radius: 5px;
+	cursor: pointer;
 	border: 3px solid rgba(229, 71, 60, 1);
 }
 
@@ -65,7 +66,7 @@ button{
 }
 button:hover{
   background:#fff;
-  color:#1AAB8A;
+  color: rgba(229, 71, 60, 0.90);
 }
 button:before,button:after{
   content:'';
@@ -74,7 +75,7 @@ button:before,button:after{
   right:0;
   height:2px;
   width:0;
-  background: #1AAB8A;
+  background: rgba(0, 0, 0, 0.70);
   transition:400ms ease all;
 }
 button:after{
